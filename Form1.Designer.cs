@@ -35,19 +35,16 @@
             label2 = new Label();
             btnSelectImg2 = new Button();
             pbImg1 = new PictureBox();
-            label3 = new Label();
-            label4 = new Label();
             pbImg2 = new PictureBox();
             pbResult = new PictureBox();
-            label5 = new Label();
-            btnStart1 = new Button();
+            StitchBtn = new Button();
             label6 = new Label();
             panel1 = new Panel();
             rcbType2 = new RadioButton();
             rcbType1 = new RadioButton();
             SaveBtn = new Button();
-            button1 = new Button();
-            TestBtn = new Button();
+            JoinBtn = new Button();
+            MadePnrmBtn = new Button();
             NextBtn = new Button();
             PrevBtn = new Button();
             DirectoryTextBox = new TextBox();
@@ -55,6 +52,12 @@
             FileNumbrLabel = new Label();
             SaveFileLabel = new Label();
             comboBox = new ComboBox();
+            TestBtn = new Button();
+            ReloadBtn = new Button();
+            SelectFilesBtn = new Button();
+            DelCopyBtn = new Button();
+            CrearBtn = new Button();
+            UsingFileslabel = new Label();
             ((System.ComponentModel.ISupportInitialize)pbImg1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbImg2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbResult).BeginInit();
@@ -63,10 +66,10 @@
             // 
             // btnSelectImg1
             // 
-            btnSelectImg1.Location = new Point(1119, 9);
+            btnSelectImg1.Location = new Point(1008, 42);
             btnSelectImg1.Margin = new Padding(4);
             btnSelectImg1.Name = "btnSelectImg1";
-            btnSelectImg1.Size = new Size(25, 29);
+            btnSelectImg1.Size = new Size(25, 26);
             btnSelectImg1.TabIndex = 0;
             btnSelectImg1.Text = "...";
             btnSelectImg1.UseVisualStyleBackColor = true;
@@ -75,7 +78,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(15, 15);
+            label1.Location = new Point(15, 47);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(95, 15);
@@ -84,28 +87,28 @@
             // 
             // FirstImgTxtBox
             // 
-            FirstImgTxtBox.Location = new Point(112, 11);
+            FirstImgTxtBox.Location = new Point(112, 43);
             FirstImgTxtBox.Margin = new Padding(4);
             FirstImgTxtBox.Name = "FirstImgTxtBox";
             FirstImgTxtBox.ReadOnly = true;
-            FirstImgTxtBox.Size = new Size(999, 23);
+            FirstImgTxtBox.Size = new Size(888, 23);
             FirstImgTxtBox.TabIndex = 2;
             FirstImgTxtBox.TextChanged += FirstImgTxtBox_TextChanged;
             // 
             // SecondImgTxtBox
             // 
-            SecondImgTxtBox.Location = new Point(112, 45);
+            SecondImgTxtBox.Location = new Point(112, 77);
             SecondImgTxtBox.Margin = new Padding(4);
             SecondImgTxtBox.Name = "SecondImgTxtBox";
             SecondImgTxtBox.ReadOnly = true;
-            SecondImgTxtBox.Size = new Size(999, 23);
+            SecondImgTxtBox.Size = new Size(888, 23);
             SecondImgTxtBox.TabIndex = 5;
             SecondImgTxtBox.TextChanged += SecondImgTxtBox_TextChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(15, 49);
+            label2.Location = new Point(15, 81);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(95, 15);
@@ -114,10 +117,10 @@
             // 
             // btnSelectImg2
             // 
-            btnSelectImg2.Location = new Point(1119, 42);
+            btnSelectImg2.Location = new Point(1008, 76);
             btnSelectImg2.Margin = new Padding(4);
             btnSelectImg2.Name = "btnSelectImg2";
-            btnSelectImg2.Size = new Size(25, 29);
+            btnSelectImg2.Size = new Size(25, 26);
             btnSelectImg2.TabIndex = 3;
             btnSelectImg2.Text = "...";
             btnSelectImg2.UseVisualStyleBackColor = true;
@@ -127,38 +130,18 @@
             // 
             pbImg1.BackgroundImageLayout = ImageLayout.Zoom;
             pbImg1.BorderStyle = BorderStyle.FixedSingle;
-            pbImg1.Location = new Point(14, 111);
+            pbImg1.Location = new Point(14, 142);
             pbImg1.Margin = new Padding(4);
             pbImg1.Name = "pbImg1";
             pbImg1.Size = new Size(340, 358);
             pbImg1.TabIndex = 6;
             pbImg1.TabStop = false;
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(159, 480);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(53, 15);
-            label3.TabIndex = 7;
-            label3.Text = "picture 1";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(159, 885);
-            label4.Margin = new Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(53, 15);
-            label4.TabIndex = 9;
-            label4.Text = "picture 2";
-            // 
             // pbImg2
             // 
             pbImg2.BackgroundImageLayout = ImageLayout.Zoom;
             pbImg2.BorderStyle = BorderStyle.FixedSingle;
-            pbImg2.Location = new Point(14, 518);
+            pbImg2.Location = new Point(14, 549);
             pbImg2.Margin = new Padding(4);
             pbImg2.Name = "pbImg2";
             pbImg2.Size = new Size(340, 363);
@@ -169,38 +152,28 @@
             // 
             pbResult.BackgroundImageLayout = ImageLayout.Zoom;
             pbResult.BorderStyle = BorderStyle.FixedSingle;
-            pbResult.Location = new Point(391, 111);
+            pbResult.Location = new Point(391, 142);
             pbResult.Margin = new Padding(4);
             pbResult.Name = "pbResult";
             pbResult.Size = new Size(752, 770);
             pbResult.TabIndex = 10;
             pbResult.TabStop = false;
             // 
-            // label5
+            // StitchBtn
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(747, 885);
-            label5.Margin = new Padding(4, 0, 4, 0);
-            label5.Name = "label5";
-            label5.Size = new Size(36, 15);
-            label5.TabIndex = 11;
-            label5.Text = "result";
-            // 
-            // btnStart1
-            // 
-            btnStart1.Location = new Point(667, 80);
-            btnStart1.Margin = new Padding(4);
-            btnStart1.Name = "btnStart1";
-            btnStart1.Size = new Size(64, 23);
-            btnStart1.TabIndex = 12;
-            btnStart1.Text = "Start";
-            btnStart1.UseVisualStyleBackColor = true;
-            btnStart1.Click += btnStart1_Click;
+            StitchBtn.Location = new Point(208, 513);
+            StitchBtn.Margin = new Padding(4);
+            StitchBtn.Name = "StitchBtn";
+            StitchBtn.Size = new Size(64, 23);
+            StitchBtn.TabIndex = 12;
+            StitchBtn.Text = "Start";
+            StitchBtn.UseVisualStyleBackColor = true;
+            StitchBtn.Click += btnStart1_Click;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(13, 84);
+            label6.Location = new Point(13, 116);
             label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
             label6.Size = new Size(143, 15);
@@ -212,7 +185,7 @@
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(rcbType2);
             panel1.Controls.Add(rcbType1);
-            panel1.Location = new Point(167, 80);
+            panel1.Location = new Point(167, 112);
             panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
             panel1.Size = new Size(216, 23);
@@ -245,7 +218,7 @@
             // 
             // SaveBtn
             // 
-            SaveBtn.Location = new Point(338, 938);
+            SaveBtn.Location = new Point(11, 920);
             SaveBtn.Margin = new Padding(4);
             SaveBtn.Name = "SaveBtn";
             SaveBtn.Size = new Size(79, 23);
@@ -254,30 +227,30 @@
             SaveBtn.UseVisualStyleBackColor = true;
             SaveBtn.Click += btnSave_Click;
             // 
-            // button1
+            // JoinBtn
             // 
-            button1.Location = new Point(391, 80);
-            button1.Margin = new Padding(4);
-            button1.Name = "button1";
-            button1.Size = new Size(141, 23);
-            button1.TabIndex = 16;
-            button1.Text = "обычная строчка";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            JoinBtn.Location = new Point(97, 513);
+            JoinBtn.Margin = new Padding(4);
+            JoinBtn.Name = "JoinBtn";
+            JoinBtn.Size = new Size(75, 23);
+            JoinBtn.TabIndex = 16;
+            JoinBtn.Text = "Join";
+            JoinBtn.UseVisualStyleBackColor = true;
+            JoinBtn.Click += button1_Click;
             // 
-            // TestBtn
+            // MadePnrmBtn
             // 
-            TestBtn.Location = new Point(13, 907);
-            TestBtn.Name = "TestBtn";
-            TestBtn.Size = new Size(97, 23);
-            TestBtn.TabIndex = 17;
-            TestBtn.Text = "Made Panaram";
-            TestBtn.UseVisualStyleBackColor = true;
-            TestBtn.Click += TestBtn_Click;
+            MadePnrmBtn.Location = new Point(1040, 12);
+            MadePnrmBtn.Name = "MadePnrmBtn";
+            MadePnrmBtn.Size = new Size(105, 90);
+            MadePnrmBtn.TabIndex = 17;
+            MadePnrmBtn.Text = "Made Panaram";
+            MadePnrmBtn.UseVisualStyleBackColor = true;
+            MadePnrmBtn.Click += TestBtn_Click;
             // 
             // NextBtn
             // 
-            NextBtn.Location = new Point(279, 482);
+            NextBtn.Location = new Point(279, 513);
             NextBtn.Name = "NextBtn";
             NextBtn.Size = new Size(75, 23);
             NextBtn.TabIndex = 18;
@@ -287,7 +260,7 @@
             // 
             // PrevBtn
             // 
-            PrevBtn.Location = new Point(15, 482);
+            PrevBtn.Location = new Point(15, 513);
             PrevBtn.Name = "PrevBtn";
             PrevBtn.Size = new Size(75, 23);
             PrevBtn.TabIndex = 19;
@@ -297,17 +270,18 @@
             // 
             // DirectoryTextBox
             // 
-            DirectoryTextBox.Location = new Point(117, 907);
+            DirectoryTextBox.Location = new Point(19, 12);
             DirectoryTextBox.Margin = new Padding(4);
             DirectoryTextBox.Name = "DirectoryTextBox";
             DirectoryTextBox.ReadOnly = true;
-            DirectoryTextBox.Size = new Size(994, 23);
+            DirectoryTextBox.Size = new Size(981, 23);
             DirectoryTextBox.TabIndex = 20;
+            DirectoryTextBox.Text = "D:\\Work\\Exampels\\13";
             DirectoryTextBox.TextChanged += DirectoryTextBox_TextChanged;
             // 
             // button2
             // 
-            button2.Location = new Point(1119, 907);
+            button2.Location = new Point(1008, 12);
             button2.Margin = new Padding(4);
             button2.Name = "button2";
             button2.Size = new Size(25, 23);
@@ -319,7 +293,7 @@
             // FileNumbrLabel
             // 
             FileNumbrLabel.AutoSize = true;
-            FileNumbrLabel.Location = new Point(15, 947);
+            FileNumbrLabel.Location = new Point(675, 118);
             FileNumbrLabel.Margin = new Padding(4, 0, 4, 0);
             FileNumbrLabel.Name = "FileNumbrLabel";
             FileNumbrLabel.Size = new Size(0, 15);
@@ -328,7 +302,7 @@
             // SaveFileLabel
             // 
             SaveFileLabel.AutoSize = true;
-            SaveFileLabel.Location = new Point(425, 942);
+            SaveFileLabel.Location = new Point(98, 924);
             SaveFileLabel.Margin = new Padding(4, 0, 4, 0);
             SaveFileLabel.Name = "SaveFileLabel";
             SaveFileLabel.Size = new Size(0, 15);
@@ -337,16 +311,85 @@
             // comboBox
             // 
             comboBox.FormattingEnabled = true;
-            comboBox.Location = new Point(539, 80);
+            comboBox.Location = new Point(391, 112);
             comboBox.Name = "comboBox";
-            comboBox.Size = new Size(121, 23);
+            comboBox.Size = new Size(116, 23);
             comboBox.TabIndex = 24;
+            // 
+            // TestBtn
+            // 
+            TestBtn.Location = new Point(1080, 112);
+            TestBtn.Margin = new Padding(4);
+            TestBtn.Name = "TestBtn";
+            TestBtn.Size = new Size(64, 23);
+            TestBtn.TabIndex = 25;
+            TestBtn.Text = "Test";
+            TestBtn.UseVisualStyleBackColor = true;
+            TestBtn.Click += TestBtn_Click_1;
+            // 
+            // ReloadBtn
+            // 
+            ReloadBtn.Location = new Point(514, 112);
+            ReloadBtn.Margin = new Padding(4);
+            ReloadBtn.Name = "ReloadBtn";
+            ReloadBtn.Size = new Size(64, 23);
+            ReloadBtn.TabIndex = 26;
+            ReloadBtn.Text = "Reload";
+            ReloadBtn.UseVisualStyleBackColor = true;
+            ReloadBtn.Click += ReloadBtn_Click;
+            // 
+            // SelectFilesBtn
+            // 
+            SelectFilesBtn.Location = new Point(586, 112);
+            SelectFilesBtn.Margin = new Padding(4);
+            SelectFilesBtn.Name = "SelectFilesBtn";
+            SelectFilesBtn.Size = new Size(74, 23);
+            SelectFilesBtn.TabIndex = 27;
+            SelectFilesBtn.Text = "Select Files";
+            SelectFilesBtn.UseVisualStyleBackColor = true;
+            SelectFilesBtn.Click += SelectFilesBtn_Click;
+            // 
+            // DelCopyBtn
+            // 
+            DelCopyBtn.Location = new Point(998, 112);
+            DelCopyBtn.Margin = new Padding(4);
+            DelCopyBtn.Name = "DelCopyBtn";
+            DelCopyBtn.Size = new Size(74, 23);
+            DelCopyBtn.TabIndex = 28;
+            DelCopyBtn.Text = "Del Copy";
+            DelCopyBtn.UseVisualStyleBackColor = true;
+            // 
+            // CrearBtn
+            // 
+            CrearBtn.Location = new Point(1079, 920);
+            CrearBtn.Margin = new Padding(4);
+            CrearBtn.Name = "CrearBtn";
+            CrearBtn.Size = new Size(64, 23);
+            CrearBtn.TabIndex = 29;
+            CrearBtn.Text = "Crear";
+            CrearBtn.UseVisualStyleBackColor = true;
+            CrearBtn.Click += CrearBtn_Click;
+            // 
+            // UsingFileslabel
+            // 
+            UsingFileslabel.AutoSize = true;
+            UsingFileslabel.Location = new Point(391, 924);
+            UsingFileslabel.Margin = new Padding(4, 0, 4, 0);
+            UsingFileslabel.Name = "UsingFileslabel";
+            UsingFileslabel.Size = new Size(0, 15);
+            UsingFileslabel.TabIndex = 30;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1157, 975);
+            ClientSize = new Size(1157, 971);
+            Controls.Add(UsingFileslabel);
+            Controls.Add(CrearBtn);
+            Controls.Add(DelCopyBtn);
+            Controls.Add(SelectFilesBtn);
+            Controls.Add(ReloadBtn);
+            Controls.Add(TestBtn);
             Controls.Add(comboBox);
             Controls.Add(SaveFileLabel);
             Controls.Add(FileNumbrLabel);
@@ -354,17 +397,14 @@
             Controls.Add(DirectoryTextBox);
             Controls.Add(PrevBtn);
             Controls.Add(NextBtn);
-            Controls.Add(TestBtn);
-            Controls.Add(button1);
+            Controls.Add(MadePnrmBtn);
+            Controls.Add(JoinBtn);
             Controls.Add(SaveBtn);
             Controls.Add(panel1);
             Controls.Add(label6);
-            Controls.Add(btnStart1);
-            Controls.Add(label5);
+            Controls.Add(StitchBtn);
             Controls.Add(pbResult);
-            Controls.Add(label4);
             Controls.Add(pbImg2);
-            Controls.Add(label3);
             Controls.Add(pbImg1);
             Controls.Add(SecondImgTxtBox);
             Controls.Add(label2);
@@ -394,19 +434,16 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSelectImg2;
         private System.Windows.Forms.PictureBox pbImg1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox pbImg2;
         private System.Windows.Forms.PictureBox pbResult;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnStart1;
+        private System.Windows.Forms.Button StitchBtn;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton rcbType2;
         private System.Windows.Forms.RadioButton rcbType1;
         private System.Windows.Forms.Button SaveBtn;
-        private System.Windows.Forms.Button button1;
-        private Button TestBtn;
+        private System.Windows.Forms.Button JoinBtn;
+        private Button MadePnrmBtn;
         private Button NextBtn;
         private Button PrevBtn;
         private TextBox DirectoryTextBox;
@@ -414,5 +451,11 @@
         private Label FileNumbrLabel;
         private Label SaveFileLabel;
         private ComboBox comboBox;
+        private Button TestBtn;
+        private Button ReloadBtn;
+        private Button SelectFilesBtn;
+        private Button DelCopyBtn;
+        private Button CrearBtn;
+        private Label UsingFileslabel;
     }
 }
