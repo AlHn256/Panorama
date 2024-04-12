@@ -30,10 +30,8 @@ namespace TestWinForm.AditionalForms
             {
                 MaxPage = FileList.Count() / NumberOfElement;
                 if (MaxPage > 1) EnabledBtn();
-                //LoadeFile();
                 LoadNewElements();
             }
-
         }
 
         public void OnSendMsg(object text)
