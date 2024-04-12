@@ -1,5 +1,4 @@
 using OpenCvSharp;
-using OpenCvSharp.Detail;
 using OpenCvSharp.Extensions;
 using System.Diagnostics;
 using System.Drawing.Imaging;
@@ -11,15 +10,17 @@ using TestWinForm.Models;
 
 namespace TestWinForm
 {
-
     public partial class Form1 : Form
     {
-        private List<SelectedFiles> SelectedFileList = new List<SelectedFiles>();
-        //private FileInfo[] FileList = [];
+        private Mat LasttryStitchedImg = new Mat();
+        private FileEdit FileEdit = new FileEdit();
+        private List<SelectedFiles> FileList = new List<SelectedFiles>();
+        private string FileSaveString = string.Empty, RezultDir = @"D:\Work\Exampels\Result\", saveFileRecords = @"RecordsSave.json";
+        private int FileSaveIndex = 0;
         private int FileNumber = 1;
-
         public int Test = 10;
         public string[] fileFilter = ["*.jpeg", "*.jpg", "*.png", "*.bmp"];
+
         public Form1()
         {
             InitializeComponent();
@@ -123,31 +124,35 @@ namespace TestWinForm
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (pbResult.BackgroundImage == null || string.IsNullOrEmpty(SaveFileLabel.Text)) return;
+            string file = "Result" + FileSaveIndex + ".jpg";
+            FileSaveString = FileEdit.DirFile(DirectoryTextBox.Text, file);
 
-            FileEdit fileEdit = new FileEdit();
-            if (fileEdit.ChkFile(SaveFileLabel.Text))
+            if (pbResult.BackgroundImage == null)
             {
-                using (FileStream ms = new FileStream(SaveFileLabel.Text, FileMode.Truncate, FileAccess.Write, FileShare.Read))
+                RezultRTB.Text = "Err pbResult.BackgroundImage == null !!!";
+                return;
+
+            }
+
+            if (FileEdit.ChkFile(FileSaveString))
+            {
+                using (FileStream ms = new FileStream(FileSaveString, FileMode.Truncate, FileAccess.Write, FileShare.Read))
                 {
                     pbResult.BackgroundImage.Save(ms, ImageFormat.Jpeg);
                     byte[] ar = new byte[ms.Length];
                     ms.Write(ar, 0, ar.Length);
                     ms.Close();
+                    RezultRTB.Text = "File saved to:" + FileSaveString + "\n";
                 }
             }
         }
 
-
-        // —шивание изображений
-        private void StitcheImg(Mat[] images)
+        private void StitcheImg(Mat[] images) // —шивание изображений
         {
             Stitcher stitcher;
             if (comboBox.SelectedItem?.ToString() == "Panorama") stitcher = Stitcher.Create(Stitcher.Mode.Panorama);
             else stitcher = Stitcher.Create(Stitcher.Mode.Scans);
             Mat pano = new Mat();
-
-
             Stitcher.Status status = stitcher.Stitch(images, pano);
             if (status != Stitcher.Status.OK)
             {
@@ -159,16 +164,15 @@ namespace TestWinForm
 
         private void LoadeFiles()
         {
-            FileEdit fileEdit = new FileEdit();
-            if (string.IsNullOrEmpty(DirectoryTextBox.Text)) DirectoryTextBox.Text = fileEdit.GetDefoltDirectory();
-            FileInfo[] fileList = fileEdit.SearchFiles(DirectoryTextBox.Text, fileFilter, 1);
+            if (string.IsNullOrEmpty(DirectoryTextBox.Text)) DirectoryTextBox.Text = FileEdit.GetDefoltDirectory();
+            FileInfo[] fileList = FileEdit.SearchFiles(DirectoryTextBox.Text, fileFilter, 1);
             fileList = fileList.Where(f => f.Name != "Result.jpg").ToArray();
 
             FileNumbrLabel.Text = fileList.Length + " файлов найдено";
             pbResult.BackgroundImage = null;
             if (fileList.Length > 1)
             {
-                SaveFileLabel.Text = fileEdit.DirFile(DirectoryTextBox.Text, "Result.jpg");
+                FileSaveString = FileEdit.DirFile(DirectoryTextBox.Text, "Result.jpg");
                 FirstImgTxtBox.Text = fileList[0].FullName;
                 SecondImgTxtBox.Text = fileList[1].FullName;
                 FileNumber = 1;
@@ -176,7 +180,7 @@ namespace TestWinForm
             }
             else
             {
-                SaveFileLabel.Text = string.Empty;
+                FileSaveString = string.Empty;
                 FirstImgTxtBox.Text = string.Empty;
                 SecondImgTxtBox.Text = string.Empty;
                 DisEnableBtn();
@@ -184,28 +188,38 @@ namespace TestWinForm
             }
 
             int id = 0;
-            SelectedFileList = fileList.Select(x => new SelectedFiles()
+            FileList = fileList.Select(x => new SelectedFiles()
             {
                 Id = id++,
                 File = x.FullName,
                 Name = x.Name,
                 IsSelected = true
             }).ToList();
-            FileNumbrLabel.Text += " \\ " + SelectedFileList.Count() + " выбранно";
+            FileNumbrLabel.Text += " \\ " + FileList.Count() + " выбранно";
         }
 
         private void TestBtn_Click(object sender, EventArgs e)
         {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
             pbResult.BackgroundImage = null;
-            var name = SelectedFileList.Where(x => x.Name != "Result.jpg" && x.IsSelected).Select(x => x.File).ToArray();
+            var name = FileList.Where(x => x.Name != "Result.jpg" && x.IsSelected).Select(x => x.File).ToArray();
 
-            var tmp = SelectedFileList.Where(x => x.Name != "Result.jpg" && x.IsSelected).Select(x => x.Name).ToArray();
-            string tst = string.Empty;
-            foreach ( var x in tmp )tst += x+ " ";
-            UsingFileslabel.Text = tst;
+            //var tmp = FileList.Where(x => x.Name != "Result.jpg" && x.IsSelected).Select(x => x.Name).ToArray();
+            //string tst = string.Empty;
+            //foreach (var x in tmp) tst += x + " ";
+            //RezultRTB.Text = tst;
+
+            //UpdateMessage();
+            RezultRTB.Text = string.Join(" ", FileList.Where(x => x.Name != "Result.jpg" && x.IsSelected).Select(x => x.Name));
 
             var images = name.Select(x => new Mat(x)).ToArray();
             if (images != null && images.Length != 0) StitcheImg(images);
+
+            stopWatch.Stop();
+            // Get the elapsed time as a TimeSpan value.
+            TimeSpan ts = stopWatch.Elapsed;
+            RezultRTB.Text += "\nTime " + String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
         }
 
         private void FirstImgTxtBox_TextChanged(object sender, EventArgs e)
@@ -239,7 +253,7 @@ namespace TestWinForm
         private void NextBtn_Click(object sender, EventArgs e) => ChangeFiles(1);
         private void ChangeFiles(int incr)
         {
-            var fileList = SelectedFileList.Where(x => x.IsSelected).Select(x => x.File).ToList();
+            var fileList = FileList.Where(x => x.IsSelected).Select(x => x.File).ToList();
 
             if (fileList.Count != 0)
             {
@@ -263,84 +277,74 @@ namespace TestWinForm
         private void DirectoryTextBox_TextChanged(object sender, EventArgs e) => LoadeFiles();
         private void ReloadBtn_Click(object sender, EventArgs e) => LoadeFiles();
 
-        private void TestBtn_Click_1(object sender, EventArgs e)
+        private void DistortionBtn_Click(object sender, EventArgs e)
         {
-            Process process = new Process();
-            process.StartInfo.FileName = @"D:\Work\C++\Test\Test\x64\Debug\Test.exe";
-            process.StartInfo.Arguments = " 1.jpg 2.jpg";
-            process.Start();
-            process.WaitForExit(20000);
-
-            process.CloseMainWindow();
-            process.Close();
+            DistortionTest distortionTest = new DistortionTest();
+            distortionTest.Show();
         }
-
-        private void _SendMsg(object messag) => FileNumbrLabel.Text = (string)messag;
         private void _CorrectFile(object file)
         {
             var newSelectedFiles = (SelectedFiles)file;
-            var oldSelectedFiles = SelectedFileList.Where(x => x == newSelectedFiles).FirstOrDefault();
+            var oldSelectedFiles = FileList.Where(x => x == newSelectedFiles).FirstOrDefault();
             if (oldSelectedFiles != null) { oldSelectedFiles = newSelectedFiles; }
+
+            UpdateMessage();
         }
 
         private void _UpdateTable(object saveFile)
         {
             var SaveList = (List<int>)saveFile;
-            for (int i = 0; i < SelectedFileList.Count; i++) 
+            for (int i = 0; i < FileList.Count; i++)
             {
-                if (SaveList.Any(x => x == i)) SelectedFileList[i].IsSelected = true;
-                else SelectedFileList[i].IsSelected = false;
+                if (SaveList.Any(x => x == i)) FileList[i].IsSelected = true;
+                else FileList[i].IsSelected = false;
             }
+
+            UpdateMessage();
         }
 
-        private void _AdddMsg(object messag) => FileNumbrLabel.Text += (string)messag;
+        private void UpdateMessage()
+        {
+            RezultRTB.Text = string.Join(" ", FileList.Where(x => x.IsSelected).Select(x => x.Name));
+            FileNumbrLabel.Text = FileList.Count() + " файлов найдено \\ " + FileList.Where(x => x.IsSelected).Count() + " выбранно";
+        }
 
         private void SelectFilesBtn_Click(object sender, EventArgs e)
         {
-            FileSelect fileSelect = new FileSelect(SelectedFileList);
-            fileSelect.SendMsg += _SendMsg;
+            FileSelect fileSelect = new FileSelect(FileList);
             fileSelect.UpdateTable += _UpdateTable;
             fileSelect.CorrectFile += _CorrectFile;
             fileSelect.Show();
         }
-
-        private void ReLoadeFiles()
+        private void CrearBtn_Click(object sender, EventArgs e)
         {
-            FileEdit fileEdit = new FileEdit();
-            if (string.IsNullOrEmpty(DirectoryTextBox.Text)) DirectoryTextBox.Text = fileEdit.GetDefoltDirectory();
-            FileInfo[] fileList = fileEdit.SearchFiles(DirectoryTextBox.Text, fileFilter, 1);
-            fileList = fileList.Where(f => f.Name != "Result.jpg").ToArray();
-
-            FileNumbrLabel.Text = fileList.Length + " файлов найдено";
             pbResult.BackgroundImage = null;
-            if (fileList.Length > 1)
-            {
-                SaveFileLabel.Text = fileEdit.DirFile(DirectoryTextBox.Text, "Result.jpg");
-                FirstImgTxtBox.Text = fileList[0].FullName;
-                SecondImgTxtBox.Text = fileList[1].FullName;
-                FileNumber = 1;
-                EnableBtn();
-            }
-            else
-            {
-                SaveFileLabel.Text = string.Empty;
-                FirstImgTxtBox.Text = string.Empty;
-                SecondImgTxtBox.Text = string.Empty;
-                DisEnableBtn();
-                return;
-            }
-
-            int id = 0;
-            SelectedFileList = fileList.Select(x => new SelectedFiles()
-            {
-                Id = id++,
-                File = x.FullName,
-                Name = x.Name,
-                IsSelected = true
-            }).ToList();
-            FileNumbrLabel.Text += " \\ " + SelectedFileList.Count() + " выбранно";
+            FileSaveIndex = 0;
+        }
+        private void TryToStitchBtn_Click(object sender, EventArgs e)
+        {
+            CreatePanoram();
         }
 
-        private void CrearBtn_Click(object sender, EventArgs e) => pbResult.BackgroundImage = null;
+        private void CreatePanoram()
+        {
+            PanoramicMerge panoramicMerge = new PanoramicMerge();
+
+            List<Records> recordsList = new List<Records>();
+            if (ReserchAndSaveChkBox.Checked)
+            {
+                recordsList = panoramicMerge.StartReserchV2(FileList);
+
+                if (recordsList != null || recordsList?.Count != 0) FileEdit.SaveRecords(saveFileRecords, recordsList);
+            }
+
+            recordsList = FileEdit.LoadRecords(saveFileRecords);
+
+            List<string[]> bloksForLoad = panoramicMerge.MergingSeparateFrames(recordsList);
+
+            if (bloksForLoad.Count != 0 && FileEdit.DelAllFileFromDir(RezultDir)) panoramicMerge.TriplStitching(bloksForLoad);
+
+            panoramicMerge.tryStitchAllFileInDir(RezultDir, FileEdit.fileFilter);
+        }
     }
 }

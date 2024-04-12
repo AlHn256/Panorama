@@ -1,12 +1,17 @@
 ﻿using System.Text;
 using System.Security.Cryptography;
+using TestWinForm.Models;
+using System.Text.Json;
 
 namespace TestWinForm
 {
     class FileEdit
     {
-        bool IsErr {  get; set; } = false;
-        string ErrText {  get; set; }
+        public bool IsErr {  get; set; } = false;
+        public string ErrText {  get; set; }
+
+        public string[] fileFilter = ["*.jpeg", "*.jpg", "*.png", "*.bmp"];
+        public string[] GetFileFilter() => fileFilter;
 
         public string AutoLoade()
         {
@@ -260,7 +265,7 @@ namespace TestWinForm
 
         public FileInfo[] SearchFiles(string dir)
         {
-            return SearchFiles(dir, new string[] { "*.*" });
+            return SearchFiles(dir,  [ "*.*" ]);
         }
 
         public FileInfo[] SearchFiles(string dir, string[] filter, int Lv = 0)
@@ -288,5 +293,38 @@ namespace TestWinForm
         }
 
         public string GetDefoltDirectory() => AppDomain.CurrentDomain.BaseDirectory;
+
+        public bool DelAllFileFromDir(string rezultDir)
+        {
+            bool rezult = true;
+            var fileList = SearchFiles(rezultDir);
+            if (fileList != null)
+            {
+                foreach (var f in fileList)
+                {
+                    File.Delete(f.FullName);
+                    if (File.Exists(f.FullName)) rezult = false;
+                }
+            }
+            return rezult;
+        }
+
+        public List<Records> LoadRecords(string file)
+        {
+            List<Records> recordsList = new List<Records>();
+            if (File.Exists(file))
+            {
+                string jsonString = File.ReadAllText(file);
+                recordsList = JsonSerializer.Deserialize<List<Records>>(jsonString)!;
+            }
+            return recordsList;
+        }
+        public bool SaveRecords(string file, List<Records> recordsList)
+        {
+            string json = JsonSerializer.Serialize(recordsList);
+            File.WriteAllText(file, json);
+            return true;
+        }
+
     }
 }

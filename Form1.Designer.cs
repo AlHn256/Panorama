@@ -13,14 +13,9 @@
         /// <param name = "Утилизация"> Если размещенный ресурс должен быть освобожден, true; в противном случае false. </ param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+            if (disposing && (components != null))components.Dispose();
             base.Dispose(disposing);
         }
-
-
 
         /// <summary>
         /// дизайнер поддерживает требуемый метод - не модифицируйте
@@ -50,14 +45,14 @@
             DirectoryTextBox = new TextBox();
             button2 = new Button();
             FileNumbrLabel = new Label();
-            SaveFileLabel = new Label();
             comboBox = new ComboBox();
-            TestBtn = new Button();
+            DistortionBtn = new Button();
             ReloadBtn = new Button();
             SelectFilesBtn = new Button();
-            DelCopyBtn = new Button();
+            TryToStitchBtn = new Button();
             CrearBtn = new Button();
-            UsingFileslabel = new Label();
+            ReserchAndSaveChkBox = new CheckBox();
+            RezultRTB = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)pbImg1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbImg2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbResult).BeginInit();
@@ -133,7 +128,7 @@
             pbImg1.Location = new Point(14, 142);
             pbImg1.Margin = new Padding(4);
             pbImg1.Name = "pbImg1";
-            pbImg1.Size = new Size(340, 358);
+            pbImg1.Size = new Size(369, 358);
             pbImg1.TabIndex = 6;
             pbImg1.TabStop = false;
             // 
@@ -144,7 +139,7 @@
             pbImg2.Location = new Point(14, 549);
             pbImg2.Margin = new Padding(4);
             pbImg2.Name = "pbImg2";
-            pbImg2.Size = new Size(340, 363);
+            pbImg2.Size = new Size(369, 363);
             pbImg2.TabIndex = 8;
             pbImg2.TabStop = false;
             // 
@@ -161,7 +156,7 @@
             // 
             // StitchBtn
             // 
-            StitchBtn.Location = new Point(208, 513);
+            StitchBtn.Location = new Point(237, 513);
             StitchBtn.Margin = new Padding(4);
             StitchBtn.Name = "StitchBtn";
             StitchBtn.Size = new Size(64, 23);
@@ -218,12 +213,12 @@
             // 
             // SaveBtn
             // 
-            SaveBtn.Location = new Point(11, 920);
+            SaveBtn.Location = new Point(13, 914);
             SaveBtn.Margin = new Padding(4);
             SaveBtn.Name = "SaveBtn";
-            SaveBtn.Size = new Size(79, 23);
+            SaveBtn.Size = new Size(111, 53);
             SaveBtn.TabIndex = 15;
-            SaveBtn.Text = "Сохранить карту результатов";
+            SaveBtn.Text = "Сохранить";
             SaveBtn.UseVisualStyleBackColor = true;
             SaveBtn.Click += btnSave_Click;
             // 
@@ -250,7 +245,7 @@
             // 
             // NextBtn
             // 
-            NextBtn.Location = new Point(279, 513);
+            NextBtn.Location = new Point(308, 513);
             NextBtn.Name = "NextBtn";
             NextBtn.Size = new Size(75, 23);
             NextBtn.TabIndex = 18;
@@ -260,9 +255,9 @@
             // 
             // PrevBtn
             // 
-            PrevBtn.Location = new Point(15, 513);
+            PrevBtn.Location = new Point(13, 513);
             PrevBtn.Name = "PrevBtn";
-            PrevBtn.Size = new Size(75, 23);
+            PrevBtn.Size = new Size(77, 23);
             PrevBtn.TabIndex = 19;
             PrevBtn.Text = "Prev";
             PrevBtn.UseVisualStyleBackColor = true;
@@ -276,7 +271,7 @@
             DirectoryTextBox.ReadOnly = true;
             DirectoryTextBox.Size = new Size(981, 23);
             DirectoryTextBox.TabIndex = 20;
-            DirectoryTextBox.Text = "D:\\Work\\Exampels\\13";
+            DirectoryTextBox.Text = "D:\\Work\\Exampels\\13Out";
             DirectoryTextBox.TextChanged += DirectoryTextBox_TextChanged;
             // 
             // button2
@@ -299,15 +294,6 @@
             FileNumbrLabel.Size = new Size(0, 15);
             FileNumbrLabel.TabIndex = 22;
             // 
-            // SaveFileLabel
-            // 
-            SaveFileLabel.AutoSize = true;
-            SaveFileLabel.Location = new Point(98, 924);
-            SaveFileLabel.Margin = new Padding(4, 0, 4, 0);
-            SaveFileLabel.Name = "SaveFileLabel";
-            SaveFileLabel.Size = new Size(0, 15);
-            SaveFileLabel.TabIndex = 23;
-            // 
             // comboBox
             // 
             comboBox.FormattingEnabled = true;
@@ -316,16 +302,16 @@
             comboBox.Size = new Size(116, 23);
             comboBox.TabIndex = 24;
             // 
-            // TestBtn
+            // DistortionBtn
             // 
-            TestBtn.Location = new Point(1080, 112);
-            TestBtn.Margin = new Padding(4);
-            TestBtn.Name = "TestBtn";
-            TestBtn.Size = new Size(64, 23);
-            TestBtn.TabIndex = 25;
-            TestBtn.Text = "Test";
-            TestBtn.UseVisualStyleBackColor = true;
-            TestBtn.Click += TestBtn_Click_1;
+            DistortionBtn.Location = new Point(132, 914);
+            DistortionBtn.Margin = new Padding(4);
+            DistortionBtn.Name = "DistortionBtn";
+            DistortionBtn.Size = new Size(121, 53);
+            DistortionBtn.TabIndex = 25;
+            DistortionBtn.Text = "Distortion";
+            DistortionBtn.UseVisualStyleBackColor = true;
+            DistortionBtn.Click += DistortionBtn_Click;
             // 
             // ReloadBtn
             // 
@@ -349,49 +335,59 @@
             SelectFilesBtn.UseVisualStyleBackColor = true;
             SelectFilesBtn.Click += SelectFilesBtn_Click;
             // 
-            // DelCopyBtn
+            // TryToStitchBtn
             // 
-            DelCopyBtn.Location = new Point(998, 112);
-            DelCopyBtn.Margin = new Padding(4);
-            DelCopyBtn.Name = "DelCopyBtn";
-            DelCopyBtn.Size = new Size(74, 23);
-            DelCopyBtn.TabIndex = 28;
-            DelCopyBtn.Text = "Del Copy";
-            DelCopyBtn.UseVisualStyleBackColor = true;
+            TryToStitchBtn.Location = new Point(948, 111);
+            TryToStitchBtn.Margin = new Padding(4);
+            TryToStitchBtn.Name = "TryToStitchBtn";
+            TryToStitchBtn.Size = new Size(85, 23);
+            TryToStitchBtn.TabIndex = 28;
+            TryToStitchBtn.Text = "Try to stitch";
+            TryToStitchBtn.UseVisualStyleBackColor = true;
+            TryToStitchBtn.Click += TryToStitchBtn_Click;
             // 
             // CrearBtn
             // 
-            CrearBtn.Location = new Point(1079, 920);
+            CrearBtn.Location = new Point(261, 914);
             CrearBtn.Margin = new Padding(4);
             CrearBtn.Name = "CrearBtn";
-            CrearBtn.Size = new Size(64, 23);
+            CrearBtn.Size = new Size(122, 53);
             CrearBtn.TabIndex = 29;
             CrearBtn.Text = "Crear";
             CrearBtn.UseVisualStyleBackColor = true;
             CrearBtn.Click += CrearBtn_Click;
             // 
-            // UsingFileslabel
+            // ReserchAndSaveChkBox
             // 
-            UsingFileslabel.AutoSize = true;
-            UsingFileslabel.Location = new Point(391, 924);
-            UsingFileslabel.Margin = new Padding(4, 0, 4, 0);
-            UsingFileslabel.Name = "UsingFileslabel";
-            UsingFileslabel.Size = new Size(0, 15);
-            UsingFileslabel.TabIndex = 30;
+            ReserchAndSaveChkBox.AutoSize = true;
+            ReserchAndSaveChkBox.Location = new Point(1052, 112);
+            ReserchAndSaveChkBox.Name = "ReserchAndSaveChkBox";
+            ReserchAndSaveChkBox.Size = new Size(91, 19);
+            ReserchAndSaveChkBox.TabIndex = 31;
+            ReserchAndSaveChkBox.Text = "Reserch&Save";
+            ReserchAndSaveChkBox.UseVisualStyleBackColor = true;
+            // 
+            // RezultRTB
+            // 
+            RezultRTB.Location = new Point(391, 914);
+            RezultRTB.Name = "RezultRTB";
+            RezultRTB.Size = new Size(754, 53);
+            RezultRTB.TabIndex = 32;
+            RezultRTB.Text = "";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1157, 971);
-            Controls.Add(UsingFileslabel);
+            Controls.Add(RezultRTB);
+            Controls.Add(ReserchAndSaveChkBox);
             Controls.Add(CrearBtn);
-            Controls.Add(DelCopyBtn);
+            Controls.Add(TryToStitchBtn);
             Controls.Add(SelectFilesBtn);
             Controls.Add(ReloadBtn);
-            Controls.Add(TestBtn);
+            Controls.Add(DistortionBtn);
             Controls.Add(comboBox);
-            Controls.Add(SaveFileLabel);
             Controls.Add(FileNumbrLabel);
             Controls.Add(button2);
             Controls.Add(DirectoryTextBox);
@@ -449,13 +445,13 @@
         private TextBox DirectoryTextBox;
         private Button button2;
         private Label FileNumbrLabel;
-        private Label SaveFileLabel;
         private ComboBox comboBox;
-        private Button TestBtn;
+        private Button DistortionBtn;
         private Button ReloadBtn;
         private Button SelectFilesBtn;
-        private Button DelCopyBtn;
+        private Button TryToStitchBtn;
         private Button CrearBtn;
-        private Label UsingFileslabel;
+        private CheckBox ReserchAndSaveChkBox;
+        private RichTextBox RezultRTB;
     }
 }

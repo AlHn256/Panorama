@@ -7,7 +7,6 @@ namespace TestWinForm.AditionalForms
     {
         private List<SelectedFiles> FileList { get; set; }
         private List<int> SaveList = new List<int>();
-        public event Action<string> SendMsg;
         public event Action<SelectedFiles> CorrectFile;
         public event Action<List<int>> UpdateTable;
         private static int SelectedPage { get; set; }
@@ -29,14 +28,8 @@ namespace TestWinForm.AditionalForms
             else
             {
                 MaxPage = FileList.Count() / NumberOfElement;
-                if (MaxPage > 1) EnabledBtn();
                 LoadNewElements();
             }
-        }
-
-        public void OnSendMsg(object text)
-        {
-            if (SendMsg != null) SendMsg((string)text);
         }
         public void OnCorrectFile(object file)
         {
@@ -50,9 +43,7 @@ namespace TestWinForm.AditionalForms
 
         private void LoadNewElements()
         {
-            //int tmp = 0;
             int i = 0, row = 0;
-            //PrevBtn.Enabled = false;
             if (FileList.Count > MaximumImgPerPage) NextBtn.Enabled = true;
             var selectedFiles = FileList.Take(MaximumImgPerPage);
 
@@ -139,11 +130,6 @@ namespace TestWinForm.AditionalForms
             }
         }
 
-        private void EnabledBtn()
-        {
-
-        }
-
         private bool SetErr(string errText)
         {
             IsErr = true;
@@ -158,10 +144,7 @@ namespace TestWinForm.AditionalForms
             Close();
         }
 
-        private void CanselBtn_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void CanselBtn_Click(object sender, EventArgs e) => Close();
 
         private void checkBoxChanged(object sender, EventArgs e)
         {
@@ -172,9 +155,6 @@ namespace TestWinForm.AditionalForms
                 file.IsSelected = chb.Checked;
                 OnCorrectFile(file);
             }
-
-            string txt = FileList.Count() + " файлов найдено \\ " + FileList.Where(x => x.IsSelected).Count() + " выбранно";
-            OnSendMsg(txt);
         }
 
         private void checkBoxAll_CheckedChanged(object sender, EventArgs e)
@@ -245,11 +225,29 @@ namespace TestWinForm.AditionalForms
 
         private void CBtn_Click(object sender, EventArgs e)
         {
-            SaveList.Clear();
+            //SaveList.Clear();
             foreach (var elem in FileList) elem.IsSelected = false;
-            MCBtn.Enabled = false;
-            MRBtn.Enabled = false;
-            checkBoxAll.Checked = false;
+            //MCBtn.Enabled = false;
+            //MRBtn.Enabled = false;
+            //checkBoxAll.Checked = false;
+            ReloadElements();
+        }
+
+        private void PeriodBtn_Click(object sender, EventArgs e)
+        {
+            int period = 0;
+            Int32.TryParse(PeriodTxtBox.Text, out period);
+            if (period != 0)
+            {
+                foreach (var elem in FileList) elem.IsSelected = false;
+
+                for (int i = 0;i < FileList.Count();i+=period) 
+                {
+                    FileList[i].IsSelected = true;
+                }
+            }
+            FileList[FileList.Count() -1].IsSelected = true;
+
             ReloadElements();
         }
     }

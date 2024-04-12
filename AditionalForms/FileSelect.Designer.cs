@@ -36,6 +36,8 @@
             MRBtn = new Button();
             MCBtn = new Button();
             CBtn = new Button();
+            PeriodBtn = new Button();
+            PeriodTxtBox = new TextBox();
             SuspendLayout();
             // 
             // checkBoxAll
@@ -123,11 +125,31 @@
             CBtn.UseVisualStyleBackColor = true;
             CBtn.Click += CBtn_Click;
             // 
+            // PeriodBtn
+            // 
+            PeriodBtn.Location = new Point(639, 7);
+            PeriodBtn.Name = "PeriodBtn";
+            PeriodBtn.Size = new Size(50, 23);
+            PeriodBtn.TabIndex = 34;
+            PeriodBtn.Text = "Period";
+            PeriodBtn.UseVisualStyleBackColor = true;
+            PeriodBtn.Click += PeriodBtn_Click;
+            // 
+            // PeriodTxtBox
+            // 
+            PeriodTxtBox.Location = new Point(602, 7);
+            PeriodTxtBox.Name = "PeriodTxtBox";
+            PeriodTxtBox.Size = new Size(26, 23);
+            PeriodTxtBox.TabIndex = 38;
+            PeriodTxtBox.Text = "3";
+            // 
             // FileSelect
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1079, 901);
+            Controls.Add(PeriodTxtBox);
+            Controls.Add(PeriodBtn);
             Controls.Add(CBtn);
             Controls.Add(MCBtn);
             Controls.Add(MRBtn);
@@ -151,5 +173,7 @@
         private Button MRBtn;
         private Button MCBtn;
         private Button CBtn;
+        private Button PeriodBtn;
+        private TextBox PeriodTxtBox;
     }
 }
