@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using TestWinForm.Models;
 using System.Text.Json;
 
-namespace TestWinForm
+namespace TestWinForm.Models
 {
     class FileEdit
     {

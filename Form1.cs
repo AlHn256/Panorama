@@ -40,6 +40,22 @@ namespace TestWinForm
                 + "| * .png | Все файлы (*. *) | *. *";
             return openFi;
         }
+        private void MadePnrmBtn_Click(object sender, EventArgs e)
+        {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            pbResult.BackgroundImage = null;
+            var name = FileList.Where(x => x.Name != "Result.jpg" && x.IsSelected).Select(x => x.File).ToArray();
+            RezultRTB.Text = string.Join(" ", FileList.Where(x => x.Name != "Result.jpg" && x.IsSelected).Select(x => x.Name));
+
+            var images = name.Select(x => new Mat(x)).ToArray();
+            if (images != null && images.Length != 0) StitcheImg(images);
+
+            stopWatch.Stop();
+            // Get the elapsed time as a TimeSpan value.
+            TimeSpan ts = stopWatch.Elapsed;
+            RezultRTB.Text += "\nTime " + String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+        }
 
         private void btnSelectImg1_Click(object sender, EventArgs e)
         {
@@ -131,7 +147,6 @@ namespace TestWinForm
             {
                 RezultRTB.Text = "Err pbResult.BackgroundImage == null !!!";
                 return;
-
             }
 
             if (FileEdit.ChkFile(FileSaveString))
@@ -150,15 +165,24 @@ namespace TestWinForm
         private void StitcheImg(Mat[] images) // Сшивание изображений
         {
             Stitcher stitcher;
-            if (comboBox.SelectedItem?.ToString() == "Panorama") stitcher = Stitcher.Create(Stitcher.Mode.Panorama);
-            else stitcher = Stitcher.Create(Stitcher.Mode.Scans);
-            Mat pano = new Mat();
-            Stitcher.Status status = stitcher.Stitch(images, pano);
-            if (status != Stitcher.Status.OK)
+            Mat pano = new Mat(); 
+            try
             {
-                MessageBox.Show("Отказ: " + status.ToString(), status.ToString());
-                return;
+                if (comboBox.SelectedItem?.ToString() == "Panorama") stitcher = Stitcher.Create(Stitcher.Mode.Panorama);
+                else stitcher = Stitcher.Create(Stitcher.Mode.Scans);
+
+                Stitcher.Status status = stitcher.Stitch(images, pano);
+                if (status != Stitcher.Status.OK)
+                {
+                    MessageBox.Show("Err.StitcheImg: " + status.ToString(), status.ToString()+"!!!");
+                    return;
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Err.StitcheImg: " + ex.Message + "!!!");
+            }
+
             pbResult.BackgroundImage = BitmapConverter.ToBitmap(pano);
         }
 
@@ -166,7 +190,7 @@ namespace TestWinForm
         {
             if (string.IsNullOrEmpty(DirectoryTextBox.Text)) DirectoryTextBox.Text = FileEdit.GetDefoltDirectory();
             FileInfo[] fileList = FileEdit.SearchFiles(DirectoryTextBox.Text, fileFilter, 1);
-            fileList = fileList.Where(f => f.Name != "Result.jpg").ToArray();
+            fileList = fileList.Where(f => f.Name.IndexOf("Result") == -1).ToArray();
 
             FileNumbrLabel.Text = fileList.Length + " файлов найдено";
             pbResult.BackgroundImage = null;
@@ -196,30 +220,6 @@ namespace TestWinForm
                 IsSelected = true
             }).ToList();
             FileNumbrLabel.Text += " \\ " + FileList.Count() + " выбранно";
-        }
-
-        private void TestBtn_Click(object sender, EventArgs e)
-        {
-            Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
-            pbResult.BackgroundImage = null;
-            var name = FileList.Where(x => x.Name != "Result.jpg" && x.IsSelected).Select(x => x.File).ToArray();
-
-            //var tmp = FileList.Where(x => x.Name != "Result.jpg" && x.IsSelected).Select(x => x.Name).ToArray();
-            //string tst = string.Empty;
-            //foreach (var x in tmp) tst += x + " ";
-            //RezultRTB.Text = tst;
-
-            //UpdateMessage();
-            RezultRTB.Text = string.Join(" ", FileList.Where(x => x.Name != "Result.jpg" && x.IsSelected).Select(x => x.Name));
-
-            var images = name.Select(x => new Mat(x)).ToArray();
-            if (images != null && images.Length != 0) StitcheImg(images);
-
-            stopWatch.Stop();
-            // Get the elapsed time as a TimeSpan value.
-            TimeSpan ts = stopWatch.Elapsed;
-            RezultRTB.Text += "\nTime " + String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
         }
 
         private void FirstImgTxtBox_TextChanged(object sender, EventArgs e)
@@ -276,10 +276,9 @@ namespace TestWinForm
 
         private void DirectoryTextBox_TextChanged(object sender, EventArgs e) => LoadeFiles();
         private void ReloadBtn_Click(object sender, EventArgs e) => LoadeFiles();
-
         private void DistortionBtn_Click(object sender, EventArgs e)
         {
-            DistortionTest distortionTest = new DistortionTest();
+            DistortionTest distortionTest = new DistortionTest(DirectoryTextBox.Text);
             distortionTest.Show();
         }
         private void _CorrectFile(object file)
@@ -321,11 +320,7 @@ namespace TestWinForm
             pbResult.BackgroundImage = null;
             FileSaveIndex = 0;
         }
-        private void TryToStitchBtn_Click(object sender, EventArgs e)
-        {
-            CreatePanoram();
-        }
-
+        private void TryToStitchBtn_Click(object sender, EventArgs e)=>CreatePanoram();
         private void CreatePanoram()
         {
             PanoramicMerge panoramicMerge = new PanoramicMerge();
@@ -345,6 +340,93 @@ namespace TestWinForm
             if (bloksForLoad.Count != 0 && FileEdit.DelAllFileFromDir(RezultDir)) panoramicMerge.TriplStitching(bloksForLoad);
 
             panoramicMerge.tryStitchAllFileInDir(RezultDir, FileEdit.fileFilter);
+        }
+
+        private List<CopyList> CheckFileList;
+        private FileList fileList;
+        private async void FindCopyAndDel(string Dir)
+        {
+            string rezulText = string.Empty;
+            CheckFileList = new List<CopyList>();
+            if (!Directory.Exists(Dir)) return;
+
+            long maxLenghtFile = 16777216;
+            fileList = new FileList(Dir, maxLenghtFile);
+            //fileList.ProcessChanged += worker_ProcessChanged;
+
+            string text = string.Empty;
+            rezulText += "Start search" + "\nDir - " + Dir;
+            await Task.Run(() => { fileList.MadeList(); });
+            CheckFileList = fileList.GetList();
+            rezulText += "\nFinish " + CheckFileList.Count();
+
+            int i = 0, j = 0;
+            for (i = 0; i < CheckFileList.Count() - 1; i++)
+            {
+                if (CheckFileList[i].Copy > -1) continue;
+                string heshI = CheckFileList[i].Hesh;
+                long fileLength = CheckFileList[i].FileLength;
+
+
+                for (j = i + 1; j < CheckFileList.Count(); j++)
+                {
+                    if (CheckFileList[j].Copy > -1) continue;
+                    if (fileLength != 0)
+                    {
+                        if (CheckFileList[j].Copy == -1 && fileLength == CheckFileList[j].FileLength)
+                        {
+                            CheckFileList[i].Copy = i;
+                            CheckFileList[j].Copy = i;
+                        }
+                    }
+                    else
+                    {
+                        if (CheckFileList[j].Copy == -1 && heshI == CheckFileList[j].Hesh)
+                        {
+                            CheckFileList[i].Copy = i;
+                            CheckFileList[j].Copy = i;
+                        }
+                    }
+                }
+            }
+
+            var copyList = CheckFileList.Where(x => x.Copy != -1).OrderBy(y => y.Copy).ToList();
+            if (copyList.Count > 0)
+            {
+                i = -1;
+                int nDelFiles = 0;
+                foreach (var elem in copyList)
+                {
+                    if (i == elem.Copy)
+                    {
+                        elem.ForDel = true;
+
+                        File.Delete(elem.File);
+                        if (!File.Exists(elem.File)) nDelFiles++;
+                        if (elem.FileLength == 0) text += "\n" + i + " " + elem.Copy + " " + elem.File + " " + elem.Hesh + "  - DELETED by HeshCOPY";
+                        else text += "\n" + i + " " + elem.Copy + " " + elem.File + " " + elem.FileLength + "  - DELETED by LengthCOPY";
+
+                    }
+                    else
+                    {
+                        if (elem.FileLength == 0) text += "\n" + i + " " + elem.Copy + " " + elem.File + " " + elem.Hesh + "  -  HeshCOPY";
+                        else text += "\n" + i + " " + elem.Copy + " " + elem.File + " " + elem.FileLength + "  -  LengthCOPY";
+                    }
+                    i = elem.Copy;
+                }
+                if (nDelFiles > 0) text += "\n" + nDelFiles + " Deleted Files!!!";
+            }
+
+            if (copyList.Count == 0) rezulText = text + "\n" + "Kопий Nет!";
+            else rezulText = text + "\n" + copyList.Count + " kопий ";
+
+            RezultRTB.Text = rezulText;
+        }
+
+        private void DelCopyBtn_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(DirectoryTextBox.Text)) return;
+            FindCopyAndDel(DirectoryTextBox.Text);
         }
     }
 }

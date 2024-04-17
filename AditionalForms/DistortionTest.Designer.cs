@@ -58,13 +58,13 @@
             DistortionMetodLabel = new Label();
             TestBtn = new Button();
             label5 = new Label();
-            CropChkBox = new CheckBox();
+            CropBeforeChkBox = new CheckBox();
             RotationChkBox = new CheckBox();
             DistortionChkBox = new CheckBox();
-            HeightTxtBox = new TextBox();
-            WidthTxtBox = new TextBox();
-            YTxtBox = new TextBox();
-            XTxtBox = new TextBox();
+            HeightBeforeTxtBox = new TextBox();
+            WidthBeforeTxtBox = new TextBox();
+            YBeforeTxtBox = new TextBox();
+            XBeforeTxtBox = new TextBox();
             label6 = new Label();
             label7 = new Label();
             label8 = new Label();
@@ -73,6 +73,18 @@
             label9 = new Label();
             ApplyBtn = new Button();
             RezultRTB = new RichTextBox();
+            label12 = new Label();
+            label13 = new Label();
+            label14 = new Label();
+            label15 = new Label();
+            label16 = new Label();
+            label17 = new Label();
+            HeightAfterTxtBox = new TextBox();
+            WidthAfterTxtBox = new TextBox();
+            YAfterTxtBox = new TextBox();
+            XAfterTxtBox = new TextBox();
+            CropAfterChkBox = new CheckBox();
+            label18 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -86,7 +98,7 @@
             pictureBox1.Size = new Size(1278, 925);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
-            pictureBox1.DragDrop += pictureBox1_DragDrop;
+            pictureBox1.DragDrop += pictur;
             pictureBox1.MouseDown += pictureBox1_MouseDown;
             pictureBox1.MouseUp += pictureBox1_MouseUp;
             // 
@@ -102,7 +114,7 @@
             // 
             // ABtnUp
             // 
-            ABtnUp.Location = new Point(1363, 309);
+            ABtnUp.Location = new Point(1364, 269);
             ABtnUp.Name = "ABtnUp";
             ABtnUp.Size = new Size(15, 19);
             ABtnUp.TabIndex = 3;
@@ -112,7 +124,7 @@
             // 
             // ABtnDn
             // 
-            ABtnDn.Location = new Point(1385, 309);
+            ABtnDn.Location = new Point(1386, 269);
             ABtnDn.Name = "ABtnDn";
             ABtnDn.Size = new Size(15, 19);
             ABtnDn.TabIndex = 4;
@@ -122,7 +134,7 @@
             // 
             // BBtnDn
             // 
-            BBtnDn.Location = new Point(1385, 337);
+            BBtnDn.Location = new Point(1386, 297);
             BBtnDn.Name = "BBtnDn";
             BBtnDn.Size = new Size(15, 19);
             BBtnDn.TabIndex = 7;
@@ -132,7 +144,7 @@
             // 
             // BBtnUp
             // 
-            BBtnUp.Location = new Point(1363, 337);
+            BBtnUp.Location = new Point(1364, 297);
             BBtnUp.Name = "BBtnUp";
             BBtnUp.Size = new Size(15, 19);
             BBtnUp.TabIndex = 6;
@@ -142,7 +154,7 @@
             // 
             // CBtnDn
             // 
-            CBtnDn.Location = new Point(1385, 365);
+            CBtnDn.Location = new Point(1386, 325);
             CBtnDn.Name = "CBtnDn";
             CBtnDn.Size = new Size(15, 19);
             CBtnDn.TabIndex = 10;
@@ -152,7 +164,7 @@
             // 
             // CBtnUp
             // 
-            CBtnUp.Location = new Point(1363, 365);
+            CBtnUp.Location = new Point(1364, 325);
             CBtnUp.Name = "CBtnUp";
             CBtnUp.Size = new Size(15, 19);
             CBtnUp.TabIndex = 9;
@@ -162,7 +174,7 @@
             // 
             // DBtnDn
             // 
-            DBtnDn.Location = new Point(1385, 393);
+            DBtnDn.Location = new Point(1386, 353);
             DBtnDn.Name = "DBtnDn";
             DBtnDn.Size = new Size(15, 19);
             DBtnDn.TabIndex = 13;
@@ -172,7 +184,7 @@
             // 
             // DBtnUp
             // 
-            DBtnUp.Location = new Point(1363, 393);
+            DBtnUp.Location = new Point(1364, 353);
             DBtnUp.Name = "DBtnUp";
             DBtnUp.Size = new Size(15, 19);
             DBtnUp.TabIndex = 12;
@@ -182,19 +194,21 @@
             // 
             // InputDirTxtBox
             // 
-            InputDirTxtBox.Location = new Point(37, 6);
+            InputDirTxtBox.Location = new Point(74, 5);
             InputDirTxtBox.Name = "InputDirTxtBox";
-            InputDirTxtBox.Size = new Size(621, 23);
+            InputDirTxtBox.Size = new Size(1018, 23);
             InputDirTxtBox.TabIndex = 14;
+            InputDirTxtBox.TextChanged += InputDirTxtBox_TextChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label1.Location = new Point(11, 9);
             label1.Name = "label1";
-            label1.Size = new Size(20, 15);
+            label1.Size = new Size(58, 15);
             label1.TabIndex = 15;
-            label1.Text = "In:";
+            label1.Text = "Input dir:";
             // 
             // label2
             // 
@@ -214,14 +228,15 @@
             // 
             // InputFileTxtBox
             // 
-            InputFileTxtBox.Location = new Point(664, 6);
+            InputFileTxtBox.Location = new Point(1140, 6);
             InputFileTxtBox.Name = "InputFileTxtBox";
             InputFileTxtBox.Size = new Size(146, 23);
             InputFileTxtBox.TabIndex = 18;
+            InputFileTxtBox.TextChanged += InputFileTxtBox_TextChanged;
             // 
             // ATxtBox
             // 
-            ATxtBox.Location = new Point(1293, 308);
+            ATxtBox.Location = new Point(1294, 268);
             ATxtBox.Name = "ATxtBox";
             ATxtBox.Size = new Size(64, 23);
             ATxtBox.TabIndex = 19;
@@ -229,7 +244,7 @@
             // 
             // BTxtBox
             // 
-            BTxtBox.Location = new Point(1293, 336);
+            BTxtBox.Location = new Point(1294, 296);
             BTxtBox.Name = "BTxtBox";
             BTxtBox.Size = new Size(64, 23);
             BTxtBox.TabIndex = 20;
@@ -237,7 +252,7 @@
             // 
             // CTxtBox
             // 
-            CTxtBox.Location = new Point(1293, 364);
+            CTxtBox.Location = new Point(1294, 324);
             CTxtBox.Name = "CTxtBox";
             CTxtBox.Size = new Size(64, 23);
             CTxtBox.TabIndex = 21;
@@ -245,7 +260,7 @@
             // 
             // DTxtBox
             // 
-            DTxtBox.Location = new Point(1293, 392);
+            DTxtBox.Location = new Point(1294, 352);
             DTxtBox.Name = "DTxtBox";
             DTxtBox.Size = new Size(64, 23);
             DTxtBox.TabIndex = 22;
@@ -253,7 +268,7 @@
             // 
             // RotValTxtBox
             // 
-            RotValTxtBox.Location = new Point(1296, 198);
+            RotValTxtBox.Location = new Point(1292, 177);
             RotValTxtBox.Name = "RotValTxtBox";
             RotValTxtBox.Size = new Size(64, 23);
             RotValTxtBox.TabIndex = 25;
@@ -261,7 +276,7 @@
             // 
             // RBtnDn001
             // 
-            RBtnDn001.Location = new Point(1386, 198);
+            RBtnDn001.Location = new Point(1382, 177);
             RBtnDn001.Name = "RBtnDn001";
             RBtnDn001.Size = new Size(15, 23);
             RBtnDn001.TabIndex = 24;
@@ -271,7 +286,7 @@
             // 
             // RBtnUp001
             // 
-            RBtnUp001.Location = new Point(1365, 198);
+            RBtnUp001.Location = new Point(1361, 177);
             RBtnUp001.Name = "RBtnUp001";
             RBtnUp001.Size = new Size(15, 23);
             RBtnUp001.TabIndex = 23;
@@ -281,7 +296,7 @@
             // 
             // RBtnDn01
             // 
-            RBtnDn01.Location = new Point(1426, 198);
+            RBtnDn01.Location = new Point(1422, 177);
             RBtnDn01.Name = "RBtnDn01";
             RBtnDn01.Size = new Size(15, 23);
             RBtnDn01.TabIndex = 27;
@@ -291,7 +306,7 @@
             // 
             // RBtnUp01
             // 
-            RBtnUp01.Location = new Point(1406, 198);
+            RBtnUp01.Location = new Point(1402, 177);
             RBtnUp01.Name = "RBtnUp01";
             RBtnUp01.Size = new Size(15, 23);
             RBtnUp01.TabIndex = 26;
@@ -303,7 +318,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label3.Location = new Point(1341, 176);
+            label3.Location = new Point(1337, 155);
             label3.Name = "label3";
             label3.Size = new Size(66, 19);
             label3.TabIndex = 28;
@@ -314,16 +329,16 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label4.Location = new Point(816, 9);
+            label4.Location = new Point(1098, 7);
             label4.Name = "label4";
-            label4.Size = new Size(68, 19);
+            label4.Size = new Size(36, 19);
             label4.TabIndex = 29;
-            label4.Text = "Input file";
+            label4.Text = "File:";
             // 
             // DistortionMetodComBox
             // 
             DistortionMetodComBox.FormattingEnabled = true;
-            DistortionMetodComBox.Location = new Point(1293, 279);
+            DistortionMetodComBox.Location = new Point(1294, 239);
             DistortionMetodComBox.Name = "DistortionMetodComBox";
             DistortionMetodComBox.Size = new Size(145, 23);
             DistortionMetodComBox.TabIndex = 30;
@@ -333,7 +348,7 @@
             // 
             DistortionMetodLabel.AutoSize = true;
             DistortionMetodLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            DistortionMetodLabel.Location = new Point(1296, 257);
+            DistortionMetodLabel.Location = new Point(1297, 217);
             DistortionMetodLabel.Name = "DistortionMetodLabel";
             DistortionMetodLabel.Size = new Size(123, 19);
             DistortionMetodLabel.TabIndex = 31;
@@ -348,34 +363,33 @@
             TestBtn.TabIndex = 32;
             TestBtn.Text = "Test";
             TestBtn.UseVisualStyleBackColor = true;
-            TestBtn.Click += TestBtn_Click;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label5.Location = new Point(1346, 30);
+            label5.Location = new Point(1297, 10);
             label5.Name = "label5";
-            label5.Size = new Size(42, 19);
+            label5.Size = new Size(91, 19);
             label5.TabIndex = 33;
-            label5.Text = "Crop";
+            label5.Text = "Crop Before";
             label5.Click += label5_Click;
             // 
-            // CropChkBox
+            // CropBeforeChkBox
             // 
-            CropChkBox.AutoSize = true;
-            CropChkBox.Checked = true;
-            CropChkBox.CheckState = CheckState.Checked;
-            CropChkBox.Location = new Point(1394, 34);
-            CropChkBox.Name = "CropChkBox";
-            CropChkBox.Size = new Size(15, 14);
-            CropChkBox.TabIndex = 34;
-            CropChkBox.UseVisualStyleBackColor = true;
+            CropBeforeChkBox.AutoSize = true;
+            CropBeforeChkBox.Checked = true;
+            CropBeforeChkBox.CheckState = CheckState.Checked;
+            CropBeforeChkBox.Location = new Point(1390, 13);
+            CropBeforeChkBox.Name = "CropBeforeChkBox";
+            CropBeforeChkBox.Size = new Size(15, 14);
+            CropBeforeChkBox.TabIndex = 34;
+            CropBeforeChkBox.UseVisualStyleBackColor = true;
             // 
             // RotationChkBox
             // 
             RotationChkBox.AutoSize = true;
-            RotationChkBox.Location = new Point(1412, 180);
+            RotationChkBox.Location = new Point(1408, 159);
             RotationChkBox.Name = "RotationChkBox";
             RotationChkBox.Size = new Size(15, 14);
             RotationChkBox.TabIndex = 35;
@@ -384,49 +398,49 @@
             // DistortionChkBox
             // 
             DistortionChkBox.AutoSize = true;
-            DistortionChkBox.Location = new Point(1421, 261);
+            DistortionChkBox.Location = new Point(1422, 221);
             DistortionChkBox.Name = "DistortionChkBox";
             DistortionChkBox.Size = new Size(15, 14);
             DistortionChkBox.TabIndex = 36;
             DistortionChkBox.UseVisualStyleBackColor = true;
             // 
-            // HeightTxtBox
+            // HeightBeforeTxtBox
             // 
-            HeightTxtBox.Location = new Point(1351, 136);
-            HeightTxtBox.Name = "HeightTxtBox";
-            HeightTxtBox.Size = new Size(64, 23);
-            HeightTxtBox.TabIndex = 40;
-            HeightTxtBox.Text = "100";
+            HeightBeforeTxtBox.Location = new Point(1347, 115);
+            HeightBeforeTxtBox.Name = "HeightBeforeTxtBox";
+            HeightBeforeTxtBox.Size = new Size(64, 23);
+            HeightBeforeTxtBox.TabIndex = 40;
+            HeightBeforeTxtBox.Text = "100";
             // 
-            // WidthTxtBox
+            // WidthBeforeTxtBox
             // 
-            WidthTxtBox.Location = new Point(1351, 108);
-            WidthTxtBox.Name = "WidthTxtBox";
-            WidthTxtBox.Size = new Size(64, 23);
-            WidthTxtBox.TabIndex = 39;
-            WidthTxtBox.Text = "100";
+            WidthBeforeTxtBox.Location = new Point(1347, 87);
+            WidthBeforeTxtBox.Name = "WidthBeforeTxtBox";
+            WidthBeforeTxtBox.Size = new Size(64, 23);
+            WidthBeforeTxtBox.TabIndex = 39;
+            WidthBeforeTxtBox.Text = "100";
             // 
-            // YTxtBox
+            // YBeforeTxtBox
             // 
-            YTxtBox.Location = new Point(1351, 80);
-            YTxtBox.Name = "YTxtBox";
-            YTxtBox.Size = new Size(64, 23);
-            YTxtBox.TabIndex = 38;
-            YTxtBox.Text = "0";
+            YBeforeTxtBox.Location = new Point(1347, 59);
+            YBeforeTxtBox.Name = "YBeforeTxtBox";
+            YBeforeTxtBox.Size = new Size(64, 23);
+            YBeforeTxtBox.TabIndex = 38;
+            YBeforeTxtBox.Text = "0";
             // 
-            // XTxtBox
+            // XBeforeTxtBox
             // 
-            XTxtBox.Location = new Point(1351, 52);
-            XTxtBox.Name = "XTxtBox";
-            XTxtBox.Size = new Size(64, 23);
-            XTxtBox.TabIndex = 37;
-            XTxtBox.Text = "0";
+            XBeforeTxtBox.Location = new Point(1347, 31);
+            XBeforeTxtBox.Name = "XBeforeTxtBox";
+            XBeforeTxtBox.Size = new Size(64, 23);
+            XBeforeTxtBox.TabIndex = 37;
+            XBeforeTxtBox.Text = "0";
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label6.Location = new Point(1310, 54);
+            label6.Location = new Point(1312, 31);
             label6.Name = "label6";
             label6.Size = new Size(18, 19);
             label6.TabIndex = 41;
@@ -436,7 +450,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label7.Location = new Point(1310, 83);
+            label7.Location = new Point(1312, 60);
             label7.Name = "label7";
             label7.Size = new Size(18, 19);
             label7.TabIndex = 42;
@@ -446,7 +460,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label8.Location = new Point(1300, 110);
+            label8.Location = new Point(1296, 89);
             label8.Name = "label8";
             label8.Size = new Size(49, 19);
             label8.TabIndex = 43;
@@ -456,7 +470,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label10.Location = new Point(1296, 138);
+            label10.Location = new Point(1292, 117);
             label10.Name = "label10";
             label10.Size = new Size(54, 19);
             label10.TabIndex = 45;
@@ -466,7 +480,7 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label11.Location = new Point(1418, 138);
+            label11.Location = new Point(1414, 117);
             label11.Name = "label11";
             label11.Size = new Size(21, 19);
             label11.TabIndex = 46;
@@ -476,7 +490,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label9.Location = new Point(1417, 110);
+            label9.Location = new Point(1413, 89);
             label9.Name = "label9";
             label9.Size = new Size(21, 19);
             label9.TabIndex = 47;
@@ -484,7 +498,7 @@
             // 
             // ApplyBtn
             // 
-            ApplyBtn.Location = new Point(1293, 421);
+            ApplyBtn.Location = new Point(1292, 536);
             ApplyBtn.Name = "ApplyBtn";
             ApplyBtn.Size = new Size(143, 42);
             ApplyBtn.TabIndex = 48;
@@ -500,11 +514,136 @@
             RezultRTB.TabIndex = 49;
             RezultRTB.Text = "";
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label12.Location = new Point(1414, 470);
+            label12.Name = "label12";
+            label12.Size = new Size(21, 19);
+            label12.TabIndex = 61;
+            label12.Text = "%";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label13.Location = new Point(1415, 498);
+            label13.Name = "label13";
+            label13.Size = new Size(21, 19);
+            label13.TabIndex = 60;
+            label13.Text = "%";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label14.Location = new Point(1293, 498);
+            label14.Name = "label14";
+            label14.Size = new Size(54, 19);
+            label14.TabIndex = 59;
+            label14.Text = "Height";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label15.Location = new Point(1297, 470);
+            label15.Name = "label15";
+            label15.Size = new Size(49, 19);
+            label15.TabIndex = 58;
+            label15.Text = "Width";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label16.Location = new Point(1313, 441);
+            label16.Name = "label16";
+            label16.Size = new Size(18, 19);
+            label16.TabIndex = 57;
+            label16.Text = "Y";
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label17.Location = new Point(1313, 412);
+            label17.Name = "label17";
+            label17.Size = new Size(18, 19);
+            label17.TabIndex = 56;
+            label17.Text = "X";
+            // 
+            // HeightAfterTxtBox
+            // 
+            HeightAfterTxtBox.Location = new Point(1348, 496);
+            HeightAfterTxtBox.Name = "HeightAfterTxtBox";
+            HeightAfterTxtBox.Size = new Size(64, 23);
+            HeightAfterTxtBox.TabIndex = 55;
+            HeightAfterTxtBox.Text = "100";
+            // 
+            // WidthAfterTxtBox
+            // 
+            WidthAfterTxtBox.Location = new Point(1348, 468);
+            WidthAfterTxtBox.Name = "WidthAfterTxtBox";
+            WidthAfterTxtBox.Size = new Size(64, 23);
+            WidthAfterTxtBox.TabIndex = 54;
+            WidthAfterTxtBox.Text = "100";
+            // 
+            // YAfterTxtBox
+            // 
+            YAfterTxtBox.Location = new Point(1348, 440);
+            YAfterTxtBox.Name = "YAfterTxtBox";
+            YAfterTxtBox.Size = new Size(64, 23);
+            YAfterTxtBox.TabIndex = 53;
+            YAfterTxtBox.Text = "0";
+            // 
+            // XAfterTxtBox
+            // 
+            XAfterTxtBox.Location = new Point(1348, 412);
+            XAfterTxtBox.Name = "XAfterTxtBox";
+            XAfterTxtBox.Size = new Size(64, 23);
+            XAfterTxtBox.TabIndex = 52;
+            XAfterTxtBox.Text = "0";
+            // 
+            // CropAfterChkBox
+            // 
+            CropAfterChkBox.AutoSize = true;
+            CropAfterChkBox.Checked = true;
+            CropAfterChkBox.CheckState = CheckState.Checked;
+            CropAfterChkBox.Location = new Point(1391, 394);
+            CropAfterChkBox.Name = "CropAfterChkBox";
+            CropAfterChkBox.Size = new Size(15, 14);
+            CropAfterChkBox.TabIndex = 51;
+            CropAfterChkBox.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label18.Location = new Point(1298, 391);
+            label18.Name = "label18";
+            label18.Size = new Size(80, 19);
+            label18.TabIndex = 50;
+            label18.Text = "Crop After";
+            // 
             // DistortionTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1445, 1003);
+            Controls.Add(label12);
+            Controls.Add(label13);
+            Controls.Add(label14);
+            Controls.Add(label15);
+            Controls.Add(label16);
+            Controls.Add(label17);
+            Controls.Add(HeightAfterTxtBox);
+            Controls.Add(WidthAfterTxtBox);
+            Controls.Add(YAfterTxtBox);
+            Controls.Add(XAfterTxtBox);
+            Controls.Add(CropAfterChkBox);
+            Controls.Add(label18);
             Controls.Add(RezultRTB);
             Controls.Add(ApplyBtn);
             Controls.Add(label9);
@@ -513,13 +652,13 @@
             Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(label6);
-            Controls.Add(HeightTxtBox);
-            Controls.Add(WidthTxtBox);
-            Controls.Add(YTxtBox);
-            Controls.Add(XTxtBox);
+            Controls.Add(HeightBeforeTxtBox);
+            Controls.Add(WidthBeforeTxtBox);
+            Controls.Add(YBeforeTxtBox);
+            Controls.Add(XBeforeTxtBox);
             Controls.Add(DistortionChkBox);
             Controls.Add(RotationChkBox);
-            Controls.Add(CropChkBox);
+            Controls.Add(CropBeforeChkBox);
             Controls.Add(label5);
             Controls.Add(TestBtn);
             Controls.Add(DistortionMetodLabel);
@@ -552,8 +691,8 @@
             Controls.Add(pictureBox1);
             Name = "DistortionTest";
             Text = "DistortionTest";
-            DragDrop += DistortionTest_DragDrop;
-            DragEnter += DistortionTest_DragEnter;
+            DragDrop += pictur;
+            DragEnter += pictur;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -591,13 +730,13 @@
         private Label DistortionMetodLabel;
         private Button TestBtn;
         private Label label5;
-        private CheckBox CropChkBox;
+        private CheckBox CropBeforeChkBox;
         private CheckBox RotationChkBox;
         private CheckBox DistortionChkBox;
-        private TextBox HeightTxtBox;
-        private TextBox WidthTxtBox;
-        private TextBox YTxtBox;
-        private TextBox XTxtBox;
+        private TextBox HeightBeforeTxtBox;
+        private TextBox WidthBeforeTxtBox;
+        private TextBox YBeforeTxtBox;
+        private TextBox XBeforeTxtBox;
         private Label label6;
         private Label label7;
         private Label label8;
@@ -606,5 +745,17 @@
         private Label label9;
         private Button ApplyBtn;
         private RichTextBox RezultRTB;
+        private Label label12;
+        private Label label13;
+        private Label label14;
+        private Label label15;
+        private Label label16;
+        private Label label17;
+        private TextBox HeightAfterTxtBox;
+        private TextBox WidthAfterTxtBox;
+        private TextBox YAfterTxtBox;
+        private TextBox XAfterTxtBox;
+        private CheckBox CropAfterChkBox;
+        private Label label18;
     }
 }

@@ -53,6 +53,7 @@
             CrearBtn = new Button();
             ReserchAndSaveChkBox = new CheckBox();
             RezultRTB = new RichTextBox();
+            DelCopyBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)pbImg1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbImg2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbResult).BeginInit();
@@ -241,7 +242,7 @@
             MadePnrmBtn.TabIndex = 17;
             MadePnrmBtn.Text = "Made Panaram";
             MadePnrmBtn.UseVisualStyleBackColor = true;
-            MadePnrmBtn.Click += TestBtn_Click;
+            MadePnrmBtn.Click += MadePnrmBtn_Click;
             // 
             // NextBtn
             // 
@@ -304,10 +305,10 @@
             // 
             // DistortionBtn
             // 
-            DistortionBtn.Location = new Point(132, 914);
+            DistortionBtn.Location = new Point(132, 944);
             DistortionBtn.Margin = new Padding(4);
             DistortionBtn.Name = "DistortionBtn";
-            DistortionBtn.Size = new Size(121, 53);
+            DistortionBtn.Size = new Size(121, 23);
             DistortionBtn.TabIndex = 25;
             DistortionBtn.Text = "Distortion";
             DistortionBtn.UseVisualStyleBackColor = true;
@@ -375,11 +376,23 @@
             RezultRTB.TabIndex = 32;
             RezultRTB.Text = "";
             // 
+            // DelCopyBtn
+            // 
+            DelCopyBtn.Location = new Point(132, 915);
+            DelCopyBtn.Margin = new Padding(4);
+            DelCopyBtn.Name = "DelCopyBtn";
+            DelCopyBtn.Size = new Size(121, 23);
+            DelCopyBtn.TabIndex = 33;
+            DelCopyBtn.Text = "Del Copy";
+            DelCopyBtn.UseVisualStyleBackColor = true;
+            DelCopyBtn.Click += DelCopyBtn_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1157, 971);
+            Controls.Add(DelCopyBtn);
             Controls.Add(RezultRTB);
             Controls.Add(ReserchAndSaveChkBox);
             Controls.Add(CrearBtn);
@@ -453,5 +466,6 @@
         private Button CrearBtn;
         private CheckBox ReserchAndSaveChkBox;
         private RichTextBox RezultRTB;
+        private Button DelCopyBtn;
     }
 }

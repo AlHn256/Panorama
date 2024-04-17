@@ -1,4 +1,5 @@
 ﻿using ImageMagick;
+using TestWinForm.Models;
 
 namespace TestWinForm.AditionalForms
 {
@@ -9,14 +10,37 @@ namespace TestWinForm.AditionalForms
         private string[] fileFilter = ["*.jpeg", "*.jpg", "*.png", "*.bmp"];
         private FileEdit fileEdit = new FileEdit();
 
-        public DistortionTest()
+        public DistortionTest(string directory)
         {
             InitializeComponent();
-            InputFileTxtBox.Text = "43.bmp";
-            InputDirTxtBox.Text = @"D:\Work\Exampels\15";
-            OutputDirTxtBox.Text = @"D:\Work\Exampels\Out";
+            InputDirTxtBox.Text = directory;
             Load += OnLoad;
+
+            this.AllowDrop = true;
+            pictureBox1.AllowDrop = true;
+            this.DragEnter += new DragEventHandler(WindowsForm_DragEnter);
+            this.DragDrop += new DragEventHandler(WindowsForm_DragDrop);
+            pictureBox1.DragEnter += new DragEventHandler(WindowsForm_DragEnter);
+            pictureBox1.DragDrop += new DragEventHandler(WindowsForm_DragDrop);
         }
+
+        void WindowsForm_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+        void WindowsForm_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            string textdir = string.Empty, Dir = string.Empty;
+            foreach (string file in files)
+            {
+                FileAttributes attr = File.GetAttributes(file);
+                if ((attr & FileAttributes.Directory) == FileAttributes.Directory) textdir += file + "\n";
+                else textdir += Path.GetDirectoryName(file) + "\n";
+                Dir = textdir;
+            }
+        }
+
         public class Order
         {
             public string? Name { get; set; }
@@ -42,13 +66,13 @@ namespace TestWinForm.AditionalForms
             DistortionMetodComBox.DataSource = distortionMetods;
             DistortionMetodComBox.SelectedItem = DistortMethod.Barrel;
 
-            //if (File.Exists(InputFileTxtBox.Text)) pictureBox1.BackgroundImage = Image.FromFile(InputFileTxtBox.Text);
             return;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (!Directory.Exists(InputDirTxtBox.Text)) return;
+            if (!fileEdit.ChkDir(OutputDirTxtBox.Text)) return;
 
             DistortMethod distortMethod = (DistortMethod)DistortionMetodComBox.SelectedItem;
             FileInfo[] fileList = fileEdit.SearchFiles(InputDirTxtBox.Text, fileFilter, 1);
@@ -62,7 +86,8 @@ namespace TestWinForm.AditionalForms
 
         private void ReloadImg()
         {
-            if (!File.Exists(InputFileTxtBox.Text)) return;
+            string file = fileEdit.DirFile(InputDirTxtBox.Text, InputFileTxtBox.Text);
+            if (!File.Exists(file)) return;
 
             DistortMethod distortMethod = new DistortMethod();
             if (DistortionMetodComBox.SelectedItem != null) distortMethod = (DistortMethod)DistortionMetodComBox.SelectedItem;
@@ -73,48 +98,46 @@ namespace TestWinForm.AditionalForms
             string outputFileNumber = "output" + fileNumber++ + ".jpg";
 
             //var fileToSave = EditImg(InputFileTxtBox.Text, distortMethod).ToByteArray();
-            File.WriteAllBytes(outputFileNumber, EditImg(InputFileTxtBox.Text, distortMethod).ToByteArray());
+            File.WriteAllBytes(outputFileNumber, EditImg(file, distortMethod).ToByteArray());
             pictureBox1.BackgroundImage = Image.FromFile(outputFileNumber);
         }
 
-        public void ResizeImg()
-        {
-            using (MagickImage image = new MagickImage(InputFileTxtBox.Text))
-            {
+        //public void ResizeImg()
+        //{
+        //    using (MagickImage image = new MagickImage(InputFileTxtBox.Text))
+        //    {
+        //        //image
+        //        int Width = image.Width * 80 / 100;
+        //        int Height = image.Height * 80 / 100;
+        //        //conf.Width = image.Width - (conf.Left * 2);
+        //        //conf.Top = image.Height * conf.HeightProcent / 100;
+        //        //conf.Height = image.Height - (conf.Top * 2);
 
-                //image
-                int Width = image.Width * 80 / 100;
-                int Height = image.Height * 80 / 100;
-                //conf.Width = image.Width - (conf.Left * 2);
-                //conf.Top = image.Height * conf.HeightProcent / 100;
-                //conf.Height = image.Height - (conf.Top * 2);
+        //        MagickGeometry geometry = new MagickGeometry();
 
-                MagickGeometry geometry = new MagickGeometry();
+        //        geometry.Width = Width;
+        //        geometry.Height = Height;
+        //        geometry.X = 0;
+        //        geometry.Y = 300;
+        //        image.Crop(geometry);
+        //        image.Format = MagickFormat.Jpeg;
 
-                geometry.Width = Width;
-                geometry.Height = Height;
-                geometry.X = 0;
-                geometry.Y = 300;
-                image.Crop(geometry);
-                image.Format = MagickFormat.Jpeg;
-
-                string fileDest = @"D:\Work\Exampels\Result\Result.jpg";
-                image.Write(fileDest);
-            }
-
-        }
+        //        string fileDest = @"D:\Work\Exampels\Result\Result.jpg";
+        //        image.Write(fileDest);
+        //    }
+        //}
 
         private MagickImage EditImg(string InputFile, DistortMethod distortMethod)
         {
             MagickImage image = new MagickImage(InputFile);
 
-            if (CropChkBox.Checked)
+            if (CropBeforeChkBox.Checked)
             {
                 int X = 0, Y = 0, HeightPercent = 100, WidthPercent = 100;
-                Int32.TryParse(XTxtBox.Text, out X);
-                Int32.TryParse(YTxtBox.Text, out Y);
-                Int32.TryParse(HeightTxtBox.Text, out HeightPercent);
-                Int32.TryParse(WidthTxtBox.Text, out WidthPercent);
+                Int32.TryParse(XBeforeTxtBox.Text, out X);
+                Int32.TryParse(YBeforeTxtBox.Text, out Y);
+                Int32.TryParse(HeightBeforeTxtBox.Text, out HeightPercent);
+                Int32.TryParse(WidthBeforeTxtBox.Text, out WidthPercent);
 
                 MagickGeometry geometry = new MagickGeometry();
                 geometry.Width = image.Width * WidthPercent / 100;
@@ -132,6 +155,22 @@ namespace TestWinForm.AditionalForms
                 // if (distortMethod == DistortMethod.Perspective) image.Distort(DistortMethod.Perspective, new double[] { 0, 0, 20, 60, 90, 0, 70, 63, 0, 90, 5, 83, 90, 90, 85, 88 });
                 if (distortMethod == DistortMethod.Perspective) image.Distort(DistortMethod.Perspective, new double[] { 0.0, 20.60, 90.0, 70.63, 0.90, 5.83, 90.90, 85.88 });
                 if (distortMethod == DistortMethod.Arc) image.Distort(DistortMethod.Arc, 360);
+            }
+
+            if (CropAfterChkBox.Checked)
+            {
+                int X = 0, Y = 0, HeightPercent = 100, WidthPercent = 100;
+                Int32.TryParse(XAfterTxtBox.Text, out X);
+                Int32.TryParse(YAfterTxtBox.Text, out Y);
+                Int32.TryParse(HeightAfterTxtBox.Text, out HeightPercent);
+                Int32.TryParse(WidthAfterTxtBox.Text, out WidthPercent);
+
+                MagickGeometry geometry = new MagickGeometry();
+                geometry.Width = image.Width * WidthPercent / 100;
+                geometry.Height = image.Height * HeightPercent / 100;
+                geometry.X = X;
+                geometry.Y = Y;
+                image.Crop(geometry);
             }
 
             return image;
@@ -268,30 +307,12 @@ namespace TestWinForm.AditionalForms
             ReloadImg();
         }
 
-        private void TestBtn_Click(object sender, EventArgs e)
-        {
-            //ResizeImg();
-        }
+        private void ApplyBtn_Click(object sender, EventArgs e)=>ReloadImg();
+        private void label5_Click(object sender, EventArgs e)=>CropBeforeChkBox.Checked = !CropBeforeChkBox.Checked;
+        private void label3_Click(object sender, EventArgs e)=>RotationChkBox.Checked = !RotationChkBox.Checked;
+        private void DistortionMetodLabel_Click(object sender, EventArgs e)=>DistortionChkBox.Checked = !DistortionChkBox.Checked;
 
-        private void ApplyBtn_Click(object sender, EventArgs e)
-        {
-            ReloadImg();
-        }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-            CropChkBox.Checked = !CropChkBox.Checked;
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-            RotationChkBox.Checked = !RotationChkBox.Checked;
-        }
-
-        private void DistortionMetodLabel_Click(object sender, EventArgs e)
-        {
-            DistortionChkBox.Checked = !DistortionChkBox.Checked;
-        }
 
         int Xdn = 0, Ydn = 0, Xup = 0, Yup = 0;
 
@@ -299,8 +320,7 @@ namespace TestWinForm.AditionalForms
         {
             Xdn = e.X;
             Ydn = e.Y;
-            RezultRTB.Text ="Dn X "+ Xdn + " Y "+ Ydn + "\n";
-            
+            RezultRTB.Text = "Dn X " + Xdn + " Y " + Ydn + "\n";
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -322,14 +342,38 @@ namespace TestWinForm.AditionalForms
             }
         }
 
-        private void DistortionTest_DragEnter(object sender, DragEventArgs e)
+        private void pictur(object sender, DragEventArgs e)
         {
-
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            string textdir = string.Empty, Dir = string.Empty;
+            foreach (string file in files)
+            {
+                FileAttributes attr = File.GetAttributes(file);
+                if ((attr & FileAttributes.Directory) == FileAttributes.Directory) textdir = file;
+                else textdir = Path.GetDirectoryName(file);
+                Dir = textdir;
+            }
         }
 
-        private void DistortionTest_DragDrop(object sender, DragEventArgs e)
+        private void InputDirTxtBox_TextChanged(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(InputDirTxtBox.Text)) return;
+            var files = fileEdit.SearchFiles(InputDirTxtBox.Text, fileEdit.GetFileFilter(), 1);
+            if (files.Length > 0)
+            {
+                InputFileTxtBox.Text = files[0].Name;
+                pictureBox1.BackgroundImage = Image.FromFile(files[0].FullName);
+            }
 
+            OutputDirTxtBox.Text = InputDirTxtBox.Text.FirstOf('\\') + "\\" + InputDirTxtBox.Text.LastOf('\\')+ "Out";
+        }
+
+        private void InputFileTxtBox_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(InputFileTxtBox.Text)) return;
+
+            string file = fileEdit.DirFile(InputDirTxtBox.Text, InputFileTxtBox.Text);
+            if (File.Exists(file))pictureBox1.BackgroundImage = Image.FromFile(file);
         }
     }
 }
