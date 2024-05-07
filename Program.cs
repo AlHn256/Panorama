@@ -1,4 +1,4 @@
-namespace TestWinForm
+namespace Panorama
 {
     internal static class Program
     {

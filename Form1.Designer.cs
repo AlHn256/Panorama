@@ -1,4 +1,4 @@
-﻿namespace TestWinForm
+﻿namespace Panorama
 {
     partial class Form1
     {
@@ -49,11 +49,11 @@
             DistortionBtn = new Button();
             ReloadBtn = new Button();
             SelectFilesBtn = new Button();
-            TryToStitchBtn = new Button();
             CrearBtn = new Button();
             ReserchAndSaveChkBox = new CheckBox();
             RezultRTB = new RichTextBox();
             DelCopyBtn = new Button();
+            TestBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)pbImg1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbImg2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbResult).BeginInit();
@@ -336,17 +336,6 @@
             SelectFilesBtn.UseVisualStyleBackColor = true;
             SelectFilesBtn.Click += SelectFilesBtn_Click;
             // 
-            // TryToStitchBtn
-            // 
-            TryToStitchBtn.Location = new Point(948, 111);
-            TryToStitchBtn.Margin = new Padding(4);
-            TryToStitchBtn.Name = "TryToStitchBtn";
-            TryToStitchBtn.Size = new Size(85, 23);
-            TryToStitchBtn.TabIndex = 28;
-            TryToStitchBtn.Text = "Try to stitch";
-            TryToStitchBtn.UseVisualStyleBackColor = true;
-            TryToStitchBtn.Click += TryToStitchBtn_Click;
-            // 
             // CrearBtn
             // 
             CrearBtn.Location = new Point(261, 914);
@@ -387,16 +376,27 @@
             DelCopyBtn.UseVisualStyleBackColor = true;
             DelCopyBtn.Click += DelCopyBtn_Click;
             // 
+            // TestBtn
+            // 
+            TestBtn.Location = new Point(1008, 109);
+            TestBtn.Margin = new Padding(4);
+            TestBtn.Name = "TestBtn";
+            TestBtn.Size = new Size(39, 23);
+            TestBtn.TabIndex = 34;
+            TestBtn.Text = "Test";
+            TestBtn.UseVisualStyleBackColor = true;
+            TestBtn.Click += TestBtn_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1157, 971);
+            Controls.Add(TestBtn);
             Controls.Add(DelCopyBtn);
             Controls.Add(RezultRTB);
             Controls.Add(ReserchAndSaveChkBox);
             Controls.Add(CrearBtn);
-            Controls.Add(TryToStitchBtn);
             Controls.Add(SelectFilesBtn);
             Controls.Add(ReloadBtn);
             Controls.Add(DistortionBtn);
@@ -462,10 +462,10 @@
         private Button DistortionBtn;
         private Button ReloadBtn;
         private Button SelectFilesBtn;
-        private Button TryToStitchBtn;
         private Button CrearBtn;
         private CheckBox ReserchAndSaveChkBox;
         private RichTextBox RezultRTB;
         private Button DelCopyBtn;
+        private Button TestBtn;
     }
 }

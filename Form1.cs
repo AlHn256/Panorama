@@ -1,14 +1,14 @@
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
+using Panorama.AditionalForms;
+using Panorama.Models;
 using System.Diagnostics;
 using System.Drawing.Imaging;
-using TestWinForm.AditionalForms;
-using TestWinForm.Models;
 //https://blog.csdn.net/shanglianlm/article/details/84338133
 //https://russianblogs.com/article/34762434934/
 //https://pyimagesearch.com/2016/01/11/opencv-panorama-stitching/
 
-namespace TestWinForm
+namespace Panorama
 {
     public partial class Form1 : Form
     {
@@ -34,7 +34,6 @@ namespace TestWinForm
         private OpenFileDialog FileDialog()
         {
             OpenFileDialog openFi = new OpenFileDialog();
-
             openFi.Filter = "файл изображения (jpeg, gif, bmp и т. Д.) | * .jpg; *. JPEG; *. GIF; *. BMP; *. Tif; * .tiff; * .png | файл изображения JPEG * .jpg; *. JPEG) "
                 + "| * .jpg; * .jpeg | файл изображения gif (* .gif) | * .gif | файл изображения BMP (* .bmp) | * .bmp | файл изображения tiff (* .tif; *. tiff) | * .tif; *. Tiff | файл изображения PNG (* .png) "
                 + "| * .png | Все файлы (*. *) | *. *";
@@ -165,7 +164,7 @@ namespace TestWinForm
         private void StitcheImg(Mat[] images) // Сшивание изображений
         {
             Stitcher stitcher;
-            Mat pano = new Mat(); 
+            Mat pano = new Mat();
             try
             {
                 if (comboBox.SelectedItem?.ToString() == "Panorama") stitcher = Stitcher.Create(Stitcher.Mode.Panorama);
@@ -174,7 +173,7 @@ namespace TestWinForm
                 Stitcher.Status status = stitcher.Stitch(images, pano);
                 if (status != Stitcher.Status.OK)
                 {
-                    MessageBox.Show("Err.StitcheImg: " + status.ToString(), status.ToString()+"!!!");
+                    MessageBox.Show("Err.StitcheImg: " + status.ToString(), status.ToString() + "!!!");
                     return;
                 }
             }
@@ -320,7 +319,7 @@ namespace TestWinForm
             pbResult.BackgroundImage = null;
             FileSaveIndex = 0;
         }
-        private void TryToStitchBtn_Click(object sender, EventArgs e)=>CreatePanoram();
+        private void TryToStitchBtn_Click(object sender, EventArgs e) => CreatePanoram();
         private void CreatePanoram()
         {
             PanoramicMerge panoramicMerge = new PanoramicMerge();
@@ -427,6 +426,42 @@ namespace TestWinForm
         {
             if (string.IsNullOrEmpty(DirectoryTextBox.Text)) return;
             FindCopyAndDel(DirectoryTextBox.Text);
+        }
+
+        // Переименование файлов в обратном направлении
+        //private void TestBtn_Click(object sender, EventArgs e)
+        //{
+
+        //    string Dir = "D:\\Work\\Exampels\\20";
+        //    var files = fileEdit.SearchFiles(Dir);
+
+        //    files = files.OrderByDescending(x=>x.Name).ToArray();
+
+        //    if (files.Length > 0)
+        //    {
+        //        for (int i = 0;i< files.Length; i++)
+        //        {
+        //            string file = i<10? "00" + i + ".bmp":  "0" +i+".bmp";
+        //            string newfilename = Dir +"\\"+ file;
+        //            File.Move(files[i].FullName, newfilename);
+        //        }
+        //    }
+        //}
+
+        private void TestBtn_Click(object sender, EventArgs e)
+        {
+            var NewList= FileList.OrderByDescending(f => f.Name).ToList();
+            int i = 0;
+            string newDir = @"E:\Left\";
+            foreach (var item in NewList)
+            {
+                string newFileName = newDir + i +".bmp";
+                if(i<100) newFileName = newDir +"0" + i + ".bmp";
+                if(i<10) newFileName = newDir +"00" + i + ".bmp";
+
+                File.Move(item.File, newFileName);
+                i++;
+            }
         }
     }
 }

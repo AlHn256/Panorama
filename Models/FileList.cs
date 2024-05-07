@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace TestWinForm.Models
+namespace Panorama.Models
 {
     public class FileList
     {

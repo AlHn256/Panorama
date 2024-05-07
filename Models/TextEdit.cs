@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace TestWinForm.Models
+namespace Panorama.Models
 {
     public static class StringExtension
     {

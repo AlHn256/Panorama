@@ -1,6 +1,6 @@
 ﻿using OpenCvSharp;
 
-namespace TestWinForm.Models
+namespace Panorama.Models
 {
     public class PanoramicMerge
     {

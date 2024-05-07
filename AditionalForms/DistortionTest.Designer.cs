@@ -1,4 +1,4 @@
-﻿namespace TestWinForm.AditionalForms
+﻿namespace Panorama.AditionalForms
 {
     partial class DistortionTest
     {

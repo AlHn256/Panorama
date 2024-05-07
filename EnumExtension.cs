@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 
-namespace TestWinForm
+namespace Panorama
 {
     public static class EnumExtension
     {

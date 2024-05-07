@@ -1,7 +1,7 @@
 ﻿using ImageMagick;
-using TestWinForm.Models;
+using Panorama.Models;
 
-namespace TestWinForm.AditionalForms
+namespace Panorama.AditionalForms
 {
     public partial class DistortionTest : Form
     {

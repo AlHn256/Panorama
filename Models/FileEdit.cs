@@ -1,9 +1,8 @@
 ﻿using System.Text;
 using System.Security.Cryptography;
-using TestWinForm.Models;
 using System.Text.Json;
 
-namespace TestWinForm.Models
+namespace Panorama.Models
 {
     class FileEdit
     {
