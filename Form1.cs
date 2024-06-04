@@ -343,6 +343,12 @@ namespace Panorama
 
         private List<CopyList> CheckFileList;
         private FileList fileList;
+
+        private void DelCopyBtn_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(DirectoryTextBox.Text)) return;
+            FindCopyAndDel(DirectoryTextBox.Text);
+        }
         private async void FindCopyAndDel(string Dir)
         {
             string rezulText = string.Empty;
@@ -420,12 +426,6 @@ namespace Panorama
             else rezulText = text + "\n" + copyList.Count + " kопий ";
 
             RezultRTB.Text = rezulText;
-        }
-
-        private void DelCopyBtn_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(DirectoryTextBox.Text)) return;
-            FindCopyAndDel(DirectoryTextBox.Text);
         }
 
         // Переименование файлов в обратном направлении

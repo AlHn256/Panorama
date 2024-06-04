@@ -85,11 +85,13 @@
             XAfterTxtBox = new TextBox();
             CropAfterChkBox = new CheckBox();
             label18 = new Label();
+            DistZeroBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
             // 
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox1.BorderStyle = BorderStyle.FixedSingle;
             pictureBox1.Location = new Point(8, 36);
@@ -104,6 +106,7 @@
             // 
             // CorrectFilesBtn
             // 
+            CorrectFilesBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             CorrectFilesBtn.Location = new Point(1296, 960);
             CorrectFilesBtn.Name = "CorrectFilesBtn";
             CorrectFilesBtn.Size = new Size(140, 32);
@@ -114,6 +117,7 @@
             // 
             // ABtnUp
             // 
+            ABtnUp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ABtnUp.Location = new Point(1364, 269);
             ABtnUp.Name = "ABtnUp";
             ABtnUp.Size = new Size(15, 19);
@@ -124,6 +128,7 @@
             // 
             // ABtnDn
             // 
+            ABtnDn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ABtnDn.Location = new Point(1386, 269);
             ABtnDn.Name = "ABtnDn";
             ABtnDn.Size = new Size(15, 19);
@@ -134,6 +139,7 @@
             // 
             // BBtnDn
             // 
+            BBtnDn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             BBtnDn.Location = new Point(1386, 297);
             BBtnDn.Name = "BBtnDn";
             BBtnDn.Size = new Size(15, 19);
@@ -144,6 +150,7 @@
             // 
             // BBtnUp
             // 
+            BBtnUp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             BBtnUp.Location = new Point(1364, 297);
             BBtnUp.Name = "BBtnUp";
             BBtnUp.Size = new Size(15, 19);
@@ -154,6 +161,7 @@
             // 
             // CBtnDn
             // 
+            CBtnDn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             CBtnDn.Location = new Point(1386, 325);
             CBtnDn.Name = "CBtnDn";
             CBtnDn.Size = new Size(15, 19);
@@ -164,6 +172,7 @@
             // 
             // CBtnUp
             // 
+            CBtnUp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             CBtnUp.Location = new Point(1364, 325);
             CBtnUp.Name = "CBtnUp";
             CBtnUp.Size = new Size(15, 19);
@@ -174,6 +183,7 @@
             // 
             // DBtnDn
             // 
+            DBtnDn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             DBtnDn.Location = new Point(1386, 353);
             DBtnDn.Name = "DBtnDn";
             DBtnDn.Size = new Size(15, 19);
@@ -184,6 +194,7 @@
             // 
             // DBtnUp
             // 
+            DBtnUp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             DBtnUp.Location = new Point(1364, 353);
             DBtnUp.Name = "DBtnUp";
             DBtnUp.Size = new Size(15, 19);
@@ -194,6 +205,7 @@
             // 
             // InputDirTxtBox
             // 
+            InputDirTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             InputDirTxtBox.Location = new Point(74, 5);
             InputDirTxtBox.Name = "InputDirTxtBox";
             InputDirTxtBox.Size = new Size(1018, 23);
@@ -212,6 +224,7 @@
             // 
             // label2
             // 
+            label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label2.AutoSize = true;
             label2.Location = new Point(8, 971);
             label2.Name = "label2";
@@ -221,6 +234,7 @@
             // 
             // OutputDirTxtBox
             // 
+            OutputDirTxtBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             OutputDirTxtBox.Location = new Point(101, 968);
             OutputDirTxtBox.Name = "OutputDirTxtBox";
             OutputDirTxtBox.Size = new Size(1185, 23);
@@ -228,6 +242,7 @@
             // 
             // InputFileTxtBox
             // 
+            InputFileTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             InputFileTxtBox.Location = new Point(1140, 6);
             InputFileTxtBox.Name = "InputFileTxtBox";
             InputFileTxtBox.Size = new Size(146, 23);
@@ -236,6 +251,7 @@
             // 
             // ATxtBox
             // 
+            ATxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ATxtBox.Location = new Point(1294, 268);
             ATxtBox.Name = "ATxtBox";
             ATxtBox.Size = new Size(64, 23);
@@ -244,6 +260,7 @@
             // 
             // BTxtBox
             // 
+            BTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             BTxtBox.Location = new Point(1294, 296);
             BTxtBox.Name = "BTxtBox";
             BTxtBox.Size = new Size(64, 23);
@@ -252,6 +269,7 @@
             // 
             // CTxtBox
             // 
+            CTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             CTxtBox.Location = new Point(1294, 324);
             CTxtBox.Name = "CTxtBox";
             CTxtBox.Size = new Size(64, 23);
@@ -260,6 +278,7 @@
             // 
             // DTxtBox
             // 
+            DTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             DTxtBox.Location = new Point(1294, 352);
             DTxtBox.Name = "DTxtBox";
             DTxtBox.Size = new Size(64, 23);
@@ -268,6 +287,7 @@
             // 
             // RotValTxtBox
             // 
+            RotValTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             RotValTxtBox.Location = new Point(1292, 177);
             RotValTxtBox.Name = "RotValTxtBox";
             RotValTxtBox.Size = new Size(64, 23);
@@ -276,6 +296,7 @@
             // 
             // RBtnDn001
             // 
+            RBtnDn001.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             RBtnDn001.Location = new Point(1382, 177);
             RBtnDn001.Name = "RBtnDn001";
             RBtnDn001.Size = new Size(15, 23);
@@ -286,6 +307,7 @@
             // 
             // RBtnUp001
             // 
+            RBtnUp001.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             RBtnUp001.Location = new Point(1361, 177);
             RBtnUp001.Name = "RBtnUp001";
             RBtnUp001.Size = new Size(15, 23);
@@ -296,6 +318,7 @@
             // 
             // RBtnDn01
             // 
+            RBtnDn01.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             RBtnDn01.Location = new Point(1422, 177);
             RBtnDn01.Name = "RBtnDn01";
             RBtnDn01.Size = new Size(15, 23);
@@ -306,6 +329,7 @@
             // 
             // RBtnUp01
             // 
+            RBtnUp01.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             RBtnUp01.Location = new Point(1402, 177);
             RBtnUp01.Name = "RBtnUp01";
             RBtnUp01.Size = new Size(15, 23);
@@ -316,6 +340,7 @@
             // 
             // label3
             // 
+            label3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label3.Location = new Point(1337, 155);
@@ -327,6 +352,7 @@
             // 
             // label4
             // 
+            label4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label4.Location = new Point(1098, 7);
@@ -337,6 +363,7 @@
             // 
             // DistortionMetodComBox
             // 
+            DistortionMetodComBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             DistortionMetodComBox.FormattingEnabled = true;
             DistortionMetodComBox.Location = new Point(1294, 239);
             DistortionMetodComBox.Name = "DistortionMetodComBox";
@@ -346,6 +373,7 @@
             // 
             // DistortionMetodLabel
             // 
+            DistortionMetodLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             DistortionMetodLabel.AutoSize = true;
             DistortionMetodLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             DistortionMetodLabel.Location = new Point(1297, 217);
@@ -357,6 +385,7 @@
             // 
             // TestBtn
             // 
+            TestBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             TestBtn.Location = new Point(1296, 906);
             TestBtn.Name = "TestBtn";
             TestBtn.Size = new Size(140, 48);
@@ -366,6 +395,7 @@
             // 
             // label5
             // 
+            label5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label5.Location = new Point(1297, 10);
@@ -377,6 +407,7 @@
             // 
             // CropBeforeChkBox
             // 
+            CropBeforeChkBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             CropBeforeChkBox.AutoSize = true;
             CropBeforeChkBox.Checked = true;
             CropBeforeChkBox.CheckState = CheckState.Checked;
@@ -388,6 +419,7 @@
             // 
             // RotationChkBox
             // 
+            RotationChkBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             RotationChkBox.AutoSize = true;
             RotationChkBox.Location = new Point(1408, 159);
             RotationChkBox.Name = "RotationChkBox";
@@ -397,6 +429,7 @@
             // 
             // DistortionChkBox
             // 
+            DistortionChkBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             DistortionChkBox.AutoSize = true;
             DistortionChkBox.Location = new Point(1422, 221);
             DistortionChkBox.Name = "DistortionChkBox";
@@ -406,6 +439,7 @@
             // 
             // HeightBeforeTxtBox
             // 
+            HeightBeforeTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             HeightBeforeTxtBox.Location = new Point(1347, 115);
             HeightBeforeTxtBox.Name = "HeightBeforeTxtBox";
             HeightBeforeTxtBox.Size = new Size(64, 23);
@@ -414,6 +448,7 @@
             // 
             // WidthBeforeTxtBox
             // 
+            WidthBeforeTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             WidthBeforeTxtBox.Location = new Point(1347, 87);
             WidthBeforeTxtBox.Name = "WidthBeforeTxtBox";
             WidthBeforeTxtBox.Size = new Size(64, 23);
@@ -422,6 +457,7 @@
             // 
             // YBeforeTxtBox
             // 
+            YBeforeTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             YBeforeTxtBox.Location = new Point(1347, 59);
             YBeforeTxtBox.Name = "YBeforeTxtBox";
             YBeforeTxtBox.Size = new Size(64, 23);
@@ -430,6 +466,7 @@
             // 
             // XBeforeTxtBox
             // 
+            XBeforeTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             XBeforeTxtBox.Location = new Point(1347, 31);
             XBeforeTxtBox.Name = "XBeforeTxtBox";
             XBeforeTxtBox.Size = new Size(64, 23);
@@ -438,6 +475,7 @@
             // 
             // label6
             // 
+            label6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label6.Location = new Point(1312, 31);
@@ -448,6 +486,7 @@
             // 
             // label7
             // 
+            label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label7.Location = new Point(1312, 60);
@@ -458,6 +497,7 @@
             // 
             // label8
             // 
+            label8.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label8.Location = new Point(1296, 89);
@@ -468,6 +508,7 @@
             // 
             // label10
             // 
+            label10.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label10.Location = new Point(1292, 117);
@@ -478,6 +519,7 @@
             // 
             // label11
             // 
+            label11.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label11.Location = new Point(1414, 117);
@@ -488,6 +530,7 @@
             // 
             // label9
             // 
+            label9.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label9.Location = new Point(1413, 89);
@@ -498,6 +541,7 @@
             // 
             // ApplyBtn
             // 
+            ApplyBtn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ApplyBtn.Location = new Point(1292, 536);
             ApplyBtn.Name = "ApplyBtn";
             ApplyBtn.Size = new Size(143, 42);
@@ -508,6 +552,7 @@
             // 
             // RezultRTB
             // 
+            RezultRTB.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             RezultRTB.Location = new Point(1296, 752);
             RezultRTB.Name = "RezultRTB";
             RezultRTB.Size = new Size(140, 148);
@@ -516,6 +561,7 @@
             // 
             // label12
             // 
+            label12.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label12.Location = new Point(1414, 470);
@@ -526,6 +572,7 @@
             // 
             // label13
             // 
+            label13.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label13.Location = new Point(1415, 498);
@@ -536,6 +583,7 @@
             // 
             // label14
             // 
+            label14.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label14.Location = new Point(1293, 498);
@@ -546,6 +594,7 @@
             // 
             // label15
             // 
+            label15.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label15.AutoSize = true;
             label15.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label15.Location = new Point(1297, 470);
@@ -556,6 +605,7 @@
             // 
             // label16
             // 
+            label16.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label16.Location = new Point(1313, 441);
@@ -566,6 +616,7 @@
             // 
             // label17
             // 
+            label17.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label17.Location = new Point(1313, 412);
@@ -576,6 +627,7 @@
             // 
             // HeightAfterTxtBox
             // 
+            HeightAfterTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             HeightAfterTxtBox.Location = new Point(1348, 496);
             HeightAfterTxtBox.Name = "HeightAfterTxtBox";
             HeightAfterTxtBox.Size = new Size(64, 23);
@@ -584,6 +636,7 @@
             // 
             // WidthAfterTxtBox
             // 
+            WidthAfterTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             WidthAfterTxtBox.Location = new Point(1348, 468);
             WidthAfterTxtBox.Name = "WidthAfterTxtBox";
             WidthAfterTxtBox.Size = new Size(64, 23);
@@ -592,6 +645,7 @@
             // 
             // YAfterTxtBox
             // 
+            YAfterTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             YAfterTxtBox.Location = new Point(1348, 440);
             YAfterTxtBox.Name = "YAfterTxtBox";
             YAfterTxtBox.Size = new Size(64, 23);
@@ -600,6 +654,7 @@
             // 
             // XAfterTxtBox
             // 
+            XAfterTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             XAfterTxtBox.Location = new Point(1348, 412);
             XAfterTxtBox.Name = "XAfterTxtBox";
             XAfterTxtBox.Size = new Size(64, 23);
@@ -608,6 +663,7 @@
             // 
             // CropAfterChkBox
             // 
+            CropAfterChkBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             CropAfterChkBox.AutoSize = true;
             CropAfterChkBox.Checked = true;
             CropAfterChkBox.CheckState = CheckState.Checked;
@@ -619,6 +675,7 @@
             // 
             // label18
             // 
+            label18.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label18.AutoSize = true;
             label18.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label18.Location = new Point(1298, 391);
@@ -627,11 +684,24 @@
             label18.TabIndex = 50;
             label18.Text = "Crop After";
             // 
+            // DistZeroBtn
+            // 
+            DistZeroBtn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            DistZeroBtn.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            DistZeroBtn.Location = new Point(1411, 267);
+            DistZeroBtn.Name = "DistZeroBtn";
+            DistZeroBtn.Size = new Size(24, 107);
+            DistZeroBtn.TabIndex = 62;
+            DistZeroBtn.Text = "zero";
+            DistZeroBtn.UseVisualStyleBackColor = true;
+            DistZeroBtn.Click += DistZeroBtn_Click;
+            // 
             // DistortionTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1445, 1003);
+            Controls.Add(DistZeroBtn);
             Controls.Add(label12);
             Controls.Add(label13);
             Controls.Add(label14);
@@ -689,6 +759,7 @@
             Controls.Add(ABtnUp);
             Controls.Add(CorrectFilesBtn);
             Controls.Add(pictureBox1);
+            MinimumSize = new Size(1300, 900);
             Name = "DistortionTest";
             Text = "DistortionTest";
             DragDrop += pictur;
@@ -757,5 +828,6 @@
         private TextBox XAfterTxtBox;
         private CheckBox CropAfterChkBox;
         private Label label18;
+        private Button DistZeroBtn;
     }
 }

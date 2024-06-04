@@ -46,7 +46,7 @@
             button2 = new Button();
             FileNumbrLabel = new Label();
             comboBox = new ComboBox();
-            DistortionBtn = new Button();
+            ImgFixingBtn = new Button();
             ReloadBtn = new Button();
             SelectFilesBtn = new Button();
             CrearBtn = new Button();
@@ -303,16 +303,16 @@
             comboBox.Size = new Size(116, 23);
             comboBox.TabIndex = 24;
             // 
-            // DistortionBtn
+            // ImgFixingBtn
             // 
-            DistortionBtn.Location = new Point(132, 944);
-            DistortionBtn.Margin = new Padding(4);
-            DistortionBtn.Name = "DistortionBtn";
-            DistortionBtn.Size = new Size(121, 23);
-            DistortionBtn.TabIndex = 25;
-            DistortionBtn.Text = "Distortion";
-            DistortionBtn.UseVisualStyleBackColor = true;
-            DistortionBtn.Click += DistortionBtn_Click;
+            ImgFixingBtn.Location = new Point(132, 944);
+            ImgFixingBtn.Margin = new Padding(4);
+            ImgFixingBtn.Name = "ImgFixingBtn";
+            ImgFixingBtn.Size = new Size(121, 23);
+            ImgFixingBtn.TabIndex = 25;
+            ImgFixingBtn.Text = "Img Fixing";
+            ImgFixingBtn.UseVisualStyleBackColor = true;
+            ImgFixingBtn.Click += DistortionBtn_Click;
             // 
             // ReloadBtn
             // 
@@ -399,7 +399,7 @@
             Controls.Add(CrearBtn);
             Controls.Add(SelectFilesBtn);
             Controls.Add(ReloadBtn);
-            Controls.Add(DistortionBtn);
+            Controls.Add(ImgFixingBtn);
             Controls.Add(comboBox);
             Controls.Add(FileNumbrLabel);
             Controls.Add(button2);
@@ -459,7 +459,7 @@
         private Button button2;
         private Label FileNumbrLabel;
         private ComboBox comboBox;
-        private Button DistortionBtn;
+        private Button ImgFixingBtn;
         private Button ReloadBtn;
         private Button SelectFilesBtn;
         private Button CrearBtn;

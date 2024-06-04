@@ -31,14 +31,10 @@ namespace Panorama.AditionalForms
         void WindowsForm_DragDrop(object sender, DragEventArgs e)
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-            string textdir = string.Empty, Dir = string.Empty;
-            foreach (string file in files)
-            {
-                FileAttributes attr = File.GetAttributes(file);
-                if ((attr & FileAttributes.Directory) == FileAttributes.Directory) textdir += file + "\n";
-                else textdir += Path.GetDirectoryName(file) + "\n";
-                Dir = textdir;
-            }
+            if (files == null) return;
+            if (files.Length == 0)return; if (files.Length == 1)
+            InputDirTxtBox.Text = Path.GetDirectoryName(files[0]);
+            InputFileTxtBox.Text = Path.GetFileName(files[0]);
         }
 
         public class Order
@@ -307,10 +303,10 @@ namespace Panorama.AditionalForms
             ReloadImg();
         }
 
-        private void ApplyBtn_Click(object sender, EventArgs e)=>ReloadImg();
-        private void label5_Click(object sender, EventArgs e)=>CropBeforeChkBox.Checked = !CropBeforeChkBox.Checked;
-        private void label3_Click(object sender, EventArgs e)=>RotationChkBox.Checked = !RotationChkBox.Checked;
-        private void DistortionMetodLabel_Click(object sender, EventArgs e)=>DistortionChkBox.Checked = !DistortionChkBox.Checked;
+        private void ApplyBtn_Click(object sender, EventArgs e) => ReloadImg();
+        private void label5_Click(object sender, EventArgs e) => CropBeforeChkBox.Checked = !CropBeforeChkBox.Checked;
+        private void label3_Click(object sender, EventArgs e) => RotationChkBox.Checked = !RotationChkBox.Checked;
+        private void DistortionMetodLabel_Click(object sender, EventArgs e) => DistortionChkBox.Checked = !DistortionChkBox.Checked;
 
 
 
@@ -365,7 +361,7 @@ namespace Panorama.AditionalForms
                 pictureBox1.BackgroundImage = Image.FromFile(files[0].FullName);
             }
 
-            OutputDirTxtBox.Text = InputDirTxtBox.Text.FirstOf('\\') + "\\" + InputDirTxtBox.Text.LastOf('\\')+ "Out";
+            OutputDirTxtBox.Text = InputDirTxtBox.Text.FirstOf('\\') + "\\" + InputDirTxtBox.Text.LastOf('\\') + "Out";
         }
 
         private void InputFileTxtBox_TextChanged(object sender, EventArgs e)
@@ -373,7 +369,19 @@ namespace Panorama.AditionalForms
             if (string.IsNullOrEmpty(InputFileTxtBox.Text)) return;
 
             string file = fileEdit.DirFile(InputDirTxtBox.Text, InputFileTxtBox.Text);
-            if (File.Exists(file))pictureBox1.BackgroundImage = Image.FromFile(file);
+            if (File.Exists(file)) pictureBox1.BackgroundImage = Image.FromFile(file);
+        }
+        private void DistZeroBtn_Click(object sender, EventArgs e)
+        {
+            A = 0;
+            B = 0;
+            C = 0;
+            D = 1;
+            ATxtBox.Text = "0";
+            BTxtBox.Text = "0";
+            CTxtBox.Text = "0";
+            DTxtBox.Text = "1";
+            ReloadImg();
         }
     }
 }
