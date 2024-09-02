@@ -105,6 +105,14 @@ namespace Panorama
             }
             else
             {// левый и правый сплайс
+
+                //Rect rect1 = new Rect(0, 0, 20 , srcImg1.Height);
+                //Rect rect2 = new Rect(0, 0, srcImg2.Width , srcImg2.Height);
+                //Mat dstroi1 = new Mat(srcImg1, rect1);
+                //Mat dstroi2 = new Mat(srcImg2, rect2);
+                //Cv2.HConcat(srcImg1, dstroi2, ret);
+
+
                 Cv2.HConcat(srcImg1, srcImg2, ret);
             }
             pbResult.BackgroundImage = BitmapConverter.ToBitmap(ret);
